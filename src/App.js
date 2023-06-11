@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <h3> pixyverse </h3>
+      <h3> Welcome to Pixyverse </h3>
     </div>
   );
 }
