@@ -1,0 +1,52 @@
+.landing-parent-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 7rem;
+  gap: 5rem;
+}
+
+.landing-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.landing-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.landing-sub-title {
+  font-size: 12px;
+}
+
+.landing-btn-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 2rem;
+}
+
+.landing-btn {
+  padding: 1rem;
+  width: 90%;
+  font-size: medium;
+  font-weight: 600;
+  border: 1px solid;
+  border-radius: 5px;
+  background: whitesmoke;
+  color: #252525;
+  box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.25),
+    0px 0px 1px 1px rgba(9, 30, 66, 0.13);
+}
+.landing-btn:hover {
+  transition: 0.3s;
+  color: whitesmoke;
+  background: none;
+  border: 1px solid whitesmoke;
+}

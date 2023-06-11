@@ -1,9 +1,14 @@
 import "./App.css";
 
+import { Routes, Route } from "react-router-dom";
+import { Landing } from "./pages/Landing";
+
 function App() {
   return (
     <div className="App">
-      <h3> Welcome to Pixyverse </h3>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+      </Routes>
     </div>
   );
 }
