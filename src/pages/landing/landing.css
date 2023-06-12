@@ -17,6 +17,20 @@
 .landing-heading {
   font-size: 2.5rem;
   font-weight: 700;
+  background: linear-gradient(to right, whitesmoke, #003153);
+  background-size: 200% auto;
+  animation: gradientAnimation 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 50%;
+  }
 }
 
 .landing-sub-title {
@@ -30,11 +44,12 @@
   flex-wrap: wrap;
   width: 100%;
   margin: 2rem;
+  flex-direction: column;
 }
 
 .landing-btn {
+  width: 25rem;
   padding: 1rem;
-  width: 90%;
   font-size: medium;
   font-weight: 600;
   border: 1px solid;
@@ -49,4 +64,17 @@
   color: whitesmoke;
   background: none;
   border: 1px solid whitesmoke;
+}
+
+.landing-signin-link {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.landing-btn-link {
+  color: #003153;
+  text-decoration: none;
+}
+.landing-btn-link:hover {
+  color: whitesmoke;
 }
