@@ -1,61 +1,66 @@
-.signin-parent-div {
+.signup-parent-div {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   height: 100vh;
-  flex-direction: column;
+  flex-flow: column;
 }
 
-.signin-container {
-  border: 0.5px solid white;
-  border-radius: 5px;
-  padding: 1rem;
-  width: 20rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
-
-.input-div {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
-
-.signin-input {
-  width: -webkit-fill-available;
-  background: none;
-  padding: 0.7rem;
-  border: 0.5px solid white;
-  border-radius: 5px;
-}
-
-.signin-btn-div {
+.signup-container {
+  width: 25rem;
+  gap: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-}
-
-.signin-btn {
-  padding: 0.7rem;
-  margin: 1rem;
-  background: none;
-  width: 20rem;
-  color: whitesmoke;
-  font-size: medium;
+  flex-flow: column;
+  flex-wrap: wrap;
   border-radius: 5px;
   border: 0.5px solid white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.signup-div {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: column;
+  line-height: 0;
 }
 
-.signin-btn:active {
+.signup-input {
+  padding: 0.7rem;
+  width: 18rem;
+  background: none;
+  border: 0.5px solid white;
+  border-radius: 5px;
+}
+
+.signup-btn {
+  padding: 0.7rem;
+  background: none;
+  width: 18rem;
+  color: whitesmoke;
+  font-size: medium;
+  border: 0.5px solid white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.signup-btn:active {
   transition: 0.4s;
   color: #003153;
   background-color: whitesmoke;
 }
 
-.signin-page-link {
+.signup-page-link {
   text-decoration: none;
   color: whitesmoke;
+}
+
+.signup-checkbox-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }

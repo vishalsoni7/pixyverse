@@ -32,7 +32,7 @@ export const Signin = () => {
             <button className="signin-btn"> SIGN IN </button>
             <NavLink className="signin-page-link" to="/signup">
               {" "}
-              <p> Create New Account > </p>{" "}
+              <p> Create New Account </p>{" "}
             </NavLink>
           </div>
         </div>
