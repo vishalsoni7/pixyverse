@@ -9,13 +9,15 @@
 }
 
 .signup-container {
+  /* color: white;
+  background: rgba(128, 128, 128, 0.539); */
   width: 25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-flow: column;
   flex-wrap: wrap;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 0.5px solid white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -27,28 +29,29 @@
 }
 
 .signup-input {
+  color: whitesmoke;
   padding: 0.7rem;
   width: 18rem;
   background: none;
   border: 0.5px solid white;
   border-radius: 5px;
+  font-size: medium;
 }
 
 .signup-btn {
   padding: 0.7rem;
-  background: none;
+  background: rgb(29, 155, 240);
   width: 18rem;
   color: whitesmoke;
   font-size: medium;
-  border: 0.5px solid white;
+  border: none;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .signup-btn:active {
   transition: 0.4s;
-  color: #003153;
-  background-color: whitesmoke;
+  box-shadow: inset 0em 0em 0em 50em rgba(0, 0, 0, 0.3);
 }
 
 .signup-page-link {

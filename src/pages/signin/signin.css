@@ -11,7 +11,7 @@
 .signin-container {
   gap: 0.5rem;
   border: 0.5px solid white;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   padding: 1rem;
   width: 20rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
@@ -31,6 +31,8 @@
   padding: 0.7rem;
   border: 0.5px solid white;
   border-radius: 5px;
+  color: whitesmoke;
+  font-size: medium;
 }
 
 .signin-btn-div {
@@ -38,26 +40,30 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  line-height: 0;
 }
 
 .signin-btn {
   padding: 0.7rem;
   margin: 1rem;
-  background: none;
+  background: rgb(29, 155, 240);
   width: 20rem;
   color: whitesmoke;
   font-size: medium;
   border-radius: 5px;
-  border: 0.5px solid white;
+  border: none;
 }
 
 .signin-btn:active {
   transition: 0.4s;
-  color: #003153;
-  background-color: whitesmoke;
+  box-shadow: inset 0em 0em 0em 50em rgba(0, 0, 0, 0.3);
 }
 
 .signin-page-link {
   text-decoration: none;
   color: whitesmoke;
+}
+
+.guest {
+  cursor: pointer;
 }
