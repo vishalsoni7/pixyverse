@@ -1,12 +1,25 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { userSignUp } from "../../utils/authutils";
 
 import "../signup/signup.css";
 
 export const SignUp = () => {
-  const { signupDetails, setSignUpDetails, userSignUp } =
-    useContext(AuthContext);
+  const [signupDetails, setSignUpDetails] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const navigate = useNavigate();
+
+  const signUpHandler = () => {
+    userSignUp(signupDetails, navigate);
+  };
 
   return (
     <div className="signup-parent-div">
@@ -15,12 +28,23 @@ export const SignUp = () => {
         <h2>Sign Up</h2>
 
         <div className="signup-div">
-          <p>Full Name</p>
+          <p>First Name</p>
           <input
             onChange={(e) =>
-              setSignUpDetails({ ...signupDetails, fullName: e.target.value })
+              setSignUpDetails({ ...signupDetails, firstName: e.target.value })
             }
-            placeholder="Vishal Soni"
+            placeholder="Vishal"
+            className="signup-input"
+            type="text"
+          />
+        </div>
+        <div className="signup-div">
+          <p>Last Name</p>
+          <input
+            onChange={(e) =>
+              setSignUpDetails({ ...signupDetails, lastName: e.target.value })
+            }
+            placeholder="Soni"
             className="signup-input"
             type="text"
           />
@@ -30,7 +54,7 @@ export const SignUp = () => {
           <p>Username</p>
           <input
             onChange={(e) =>
-              setSignUpDetails({ ...signupDetails, userName: e.target.value })
+              setSignUpDetails({ ...signupDetails, username: e.target.value })
             }
             placeholder="vishalsoni"
             className="signup-input"
@@ -82,7 +106,7 @@ export const SignUp = () => {
           <p> I accept all Terms & Conditions</p>
         </div>
 
-        <button onClick={userSignUp} className="signup-btn">
+        <button onClick={signUpHandler} className="signup-btn">
           Create New Account
         </button>
         <NavLink className="signup-page-link" to="/signin">

@@ -1,0 +1,43 @@
+.feed-link {
+  text-decoration: none;
+  color: white;
+}
+.feed-parent-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.user-parent-div {
+  border: 0.5px solid white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+/* .user-profiles {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  line-height: 0;
+  margin: 1rem;
+  width: 100%;
+} */
+
+.user-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 1rem;
+  width: 5rem;
+}
+.user-search {
+  padding: 0.7rem;
+  border-radius: 5rem;
+  border: 0.8px solid white;
+  font-size: medium;
+  background: none;
+}
+
+/* .user-suggestion {
+   border-bottom: 0.5px solid white; 
+*/

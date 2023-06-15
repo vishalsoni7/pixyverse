@@ -31,7 +31,7 @@
   padding: 0.7rem;
   border: 0.5px solid white;
   border-radius: 5px;
-  color: whitesmoke;
+  color: white;
   font-size: medium;
 }
 
@@ -48,20 +48,20 @@
   margin: 1rem;
   background: rgb(29, 155, 240);
   width: 20rem;
-  color: whitesmoke;
+  color: white;
   font-size: medium;
   border-radius: 5px;
   border: none;
 }
 
-.signin-btn:active {
-  transition: 0.4s;
+.signin-btn:hover {
+  transition: 0.3s;
   box-shadow: inset 0em 0em 0em 50em rgba(0, 0, 0, 0.3);
 }
 
 .signin-page-link {
   text-decoration: none;
-  color: whitesmoke;
+  color: white;
 }
 
 .guest {

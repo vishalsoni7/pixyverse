@@ -11,6 +11,7 @@
 .signup-container {
   /* color: white;
   background: rgba(128, 128, 128, 0.539); */
+  line-height: 0;
   width: 25rem;
   display: flex;
   align-items: center;
@@ -29,7 +30,7 @@
 }
 
 .signup-input {
-  color: whitesmoke;
+  color: white;
   padding: 0.7rem;
   width: 18rem;
   background: none;
@@ -39,24 +40,25 @@
 }
 
 .signup-btn {
+  margin: 0.5rem;
   padding: 0.7rem;
   background: rgb(29, 155, 240);
-  width: 18rem;
-  color: whitesmoke;
+  width: 20rem;
+  color: white;
   font-size: medium;
   border: none;
   cursor: pointer;
   border-radius: 5px;
 }
 
-.signup-btn:active {
-  transition: 0.4s;
+.signup-btn:hover {
+  transition: 0.3s;
   box-shadow: inset 0em 0em 0em 50em rgba(0, 0, 0, 0.3);
 }
 
 .signup-page-link {
   text-decoration: none;
-  color: whitesmoke;
+  color: white;
 }
 
 .signup-checkbox-div {

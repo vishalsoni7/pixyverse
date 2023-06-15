@@ -4,7 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import { Landing } from "./pages/landing/Landing";
 import { Signin } from "./pages/signin/SignIn";
 import { SignUp } from "./pages/signup/SignUp";
-import { UserFeed } from "./pages/userfeed/UserFeed";
+import { Feed } from "./pages/feed/Feed";
+import { Explore } from "./pages/explore/Explore";
+import { Bookmark } from "./pages/bookmark/Bookemark";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/userfeed" element={<UserFeed />} />
+        <Route path="/home" element={<Feed />} />
+        <Route path="explore" element={<Explore />} />
+        <Route path="bookmark" element={<Bookmark />} />
       </Routes>
     </div>
   );

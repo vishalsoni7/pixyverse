@@ -1,11 +1,28 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../signin/signin.css";
 
+import { userSignIn } from "../../utils/authutils";
+
 export const Signin = () => {
-  const { signinDetails, setSignInDetails, userSignIn, guestUser } =
-    useContext(AuthContext);
+  const [signinDetails, setSignInDetails] = useState({
+    username: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleLogIn = () => {
+    userSignIn(signinDetails, navigate);
+  };
+
+  const handleGuest = () => {
+    const credential = {
+      username: "adarshbalak",
+      password: "adarshBalak123",
+    };
+    userSignIn(credential, navigate);
+  };
 
   return (
     <div className="signin-parent-div">
@@ -24,8 +41,7 @@ export const Signin = () => {
                   username: e.target.value,
                 })
               }
-              required
-              placeholder="vishalsoni"
+              placeholder="username"
               className="signin-input"
               type="text"
             />
@@ -40,7 +56,6 @@ export const Signin = () => {
                   password: e.target.value,
                 })
               }
-              required
               placeholder="***********"
               className="signin-input"
               type="password"
@@ -48,7 +63,7 @@ export const Signin = () => {
           </div>
           <div className="signin-btn-div">
             {" "}
-            <button onClick={userSignIn} className="signin-btn">
+            <button onClick={handleLogIn} className="signin-btn">
               {" "}
               SIGN IN{" "}
             </button>
@@ -56,10 +71,7 @@ export const Signin = () => {
               {" "}
               <p> Create New Account </p>{" "}
             </NavLink>
-            <p
-              className="guest"
-              onClick={() => guestUser("vishalsoni", "vishalsoni123")}
-            >
+            <p className="guest" onClick={handleGuest}>
               {" "}
               Sign In as Guest{" "}
             </p>
