@@ -1,24 +1,13 @@
 import "./App.css";
+import { AppRouts } from "./routes/Route";
 
-import { Routes, Route } from "react-router-dom";
-import { Landing } from "./pages/landing/Landing";
-import { Signin } from "./pages/signin/SignIn";
-import { SignUp } from "./pages/signup/SignUp";
-import { Feed } from "./pages/feed/Feed";
-import { Explore } from "./pages/explore/Explore";
-import { Bookmark } from "./pages/bookmark/Bookemark";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/home" element={<Feed />} />
-        <Route path="explore" element={<Explore />} />
-        <Route path="bookmark" element={<Bookmark />} />
-      </Routes>
+      <Toaster position="bottom-right" reverseOrder={false} />
+      <AppRouts />
     </div>
   );
 }

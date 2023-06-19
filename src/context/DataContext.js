@@ -1,32 +1,24 @@
-import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
+import { createContext, useEffect, useReducer } from "react";
+
+import { datareducer } from "../reducer/datareducer";
+import { getAllUsers } from "../utils/userutils";
+import { allPosts } from "../utils/postutils";
 
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  const [user, setUser] = useState([]);
-  //   const { isLoggedIn } = useContext(AuthContext);
-
-  const getuser = async () => {
-    try {
-      const {
-        status,
-        data: { users },
-      } = await axios.get("/api/users");
-      if (status === 200) {
-        setUser(users);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [initialState, dispatch] = useReducer(datareducer, {
+    posts: [],
+    users: [],
+    bookmarks: [],
+  });
 
   useEffect(() => {
-    getuser();
+    getAllUsers(dispatch);
+    allPosts(dispatch);
   }, []);
 
-  const values = { user };
+  const values = { initialState, dispatch };
   return (
     <>
       <DataContext.Provider value={values}> {children} </DataContext.Provider>

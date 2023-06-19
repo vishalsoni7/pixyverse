@@ -23,6 +23,15 @@ export const userSignIn = async (signinDetails, navigate) => {
     }
   } catch (error) {
     console.error(error);
+    toast.error("Incorrect username or password", {
+      style: {
+        fontSize: "large",
+        padding: ".5rem",
+        background: "#003153",
+        color: "white",
+        border: ".5px solid white",
+      },
+    });
   }
 };
 
@@ -39,7 +48,7 @@ export const userSignUp = async (signupDetails, navigate) => {
       navigate("/home");
       toast.success(`Welcome ${signupDetails.username}.`, {
         style: {
-          fontSize: "large",
+          fontSize: "medium",
           padding: ".5rem",
           background: "#003153",
           color: "white",
@@ -49,6 +58,15 @@ export const userSignUp = async (signupDetails, navigate) => {
     }
   } catch (error) {
     console.error(error);
+    toast.error("Incorrect username or password", {
+      style: {
+        fontSize: "medium",
+        padding: ".5rem",
+        background: "#003153",
+        color: "white",
+        border: ".5px solid white",
+      },
+    });
   }
 };
 
@@ -57,5 +75,14 @@ export const signOut = (navigate) => {
   localStorage.removeItem("signInDetails");
   localStorage.removeItem("signUpDetails");
   localStorage.removeItem("guestUser");
-  navigate("/home");
+  navigate("/signin");
+  toast.error("Signed Out", {
+    style: {
+      fontSize: "medium",
+      padding: ".5rem",
+      background: "#003153",
+      color: "white",
+      border: ".5px solid white",
+    },
+  });
 };

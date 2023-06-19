@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import { userSignUp } from "../../utils/authutils";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import "../signup/signup.css";
 
 export const SignUp = () => {
@@ -25,7 +27,9 @@ export const SignUp = () => {
     <div className="signup-parent-div">
       <h1> Pixyverse </h1>
       <div className="signup-container">
-        <h2>Sign Up</h2>
+        <h2>
+          <FontAwesomeIcon icon={faRightToBracket} /> Sign Up
+        </h2>
 
         <div className="signup-div">
           <p>First Name</p>

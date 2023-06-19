@@ -1,0 +1,88 @@
+.user-main-div {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.user-div-A {
+  width: 100%;
+  border: 0.5px solid;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  line-height: 2rem;
+  background: #00243d;
+}
+
+.user-div-A h2 {
+  text-align: left;
+  font-size: larger;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.user-div-B {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 0.3rem;
+}
+.user-div-B:hover {
+  transition: 0.3s;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.058);
+}
+
+.user-div-C {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-div-D {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  letter-spacing: 2px;
+  line-height: 1.5;
+}
+
+.user-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 1rem;
+  width: 5rem;
+  font-weight: 600;
+  color: white;
+  background: rgb(29, 155, 240);
+}
+
+.user-btn:hover {
+  transition: 0.2s;
+  box-shadow: inset 0em 0em 0em 50em rgba(0, 0, 0, 0.3);
+}
+
+.user-search-div {
+  width: 100%;
+}
+
+.user-search-div input {
+  color: white;
+  background: none;
+  padding: 0.7rem;
+  border-radius: 5rem;
+  border: 0.8px solid white;
+  font-size: medium;
+  width: 100%;
+  background: #00243d;
+}
+
+.profilePicture {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 5rem;
+  border: 1px solid;
+}

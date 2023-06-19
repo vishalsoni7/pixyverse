@@ -1,30 +1,23 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { Route, Routes } from "react-router-dom";
 
-export const Routes = () => {
-  const { signOut } = useContext(AuthContext);
+import { Landing } from "../pages/landing/Landing";
+import { Signin } from "../pages/signin/SignIn";
+import { SignUp } from "../pages/signup/SignUp";
+import { Feed } from "../pages/feed/Feed";
+import { Explore } from "../pages/explore/Explore";
+import { Bookmark } from "../pages/bookmark/Bookemark";
+
+export const AppRouts = () => {
   return (
     <div>
-      <h1> Pixyverse </h1>
-      <h3>
-        <NavLink className="feed-link" to="/home">
-          Home
-        </NavLink>
-      </h3>
-      <h3>
-        <NavLink className="feed-link" to="/explore">
-          Explore
-        </NavLink>
-      </h3>
-      <h3>
-        <NavLink className="feed-link" to="/bookmark">
-          Bookmarks
-        </NavLink>
-      </h3>
-      <h3>
-        <button onClick={signOut}> Sign Out </button>
-      </h3>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/home" element={<Feed />} />
+        <Route path="/bookmark" element={<Bookmark />} />
+      </Routes>
     </div>
   );
 };

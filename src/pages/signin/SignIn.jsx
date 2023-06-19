@@ -4,13 +4,16 @@ import "../signin/signin.css";
 
 import { userSignIn } from "../../utils/authutils";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+
 export const Signin = () => {
+  const navigate = useNavigate();
+
   const [signinDetails, setSignInDetails] = useState({
     username: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   const handleLogIn = () => {
     userSignIn(signinDetails, navigate);
@@ -30,7 +33,10 @@ export const Signin = () => {
       <h1> Pixyverse </h1>
       <div className="signin-container">
         <div>
-          <h2>Sign In</h2>
+          <h2>
+            {" "}
+            <FontAwesomeIcon icon={faRightToBracket} /> Sign In
+          </h2>
 
           <div className="input-div">
             <p>Username</p>
@@ -62,18 +68,14 @@ export const Signin = () => {
             />
           </div>
           <div className="signin-btn-div">
-            {" "}
             <button onClick={handleLogIn} className="signin-btn">
-              {" "}
-              SIGN IN{" "}
+              SIGN IN
             </button>
             <NavLink className="signin-page-link" to="/signup">
-              {" "}
-              <p> Create New Account </p>{" "}
+              <p> Create New Account </p>
             </NavLink>
             <p className="guest" onClick={handleGuest}>
-              {" "}
-              Sign In as Guest{" "}
+              Sign In as Guest
             </p>
           </div>
         </div>

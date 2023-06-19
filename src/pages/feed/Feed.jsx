@@ -1,13 +1,19 @@
-import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { DataContext } from "../../context/DataContext";
 import { signOut } from "../../utils/authutils";
+import { Users } from "../users/Users";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHouse,
+  faCompass,
+  faBookmark,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 import "../feed/feed.css";
+// import { NavBar } from "../../component/navbar/Navbar";
 
 export const Feed = () => {
-  const { user } = useContext(DataContext);
-
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -15,60 +21,59 @@ export const Feed = () => {
   };
 
   return (
-    <div className="feed-parent-div">
-      {/* ---------- navigation ------------ */}
-      <div>
-        <h1> Pixyverse </h1>
-        <h3>
-          <NavLink className="feed-link" to="/home">
-            Home
-          </NavLink>
-        </h3>
-        <h3>
-          <NavLink className="feed-link" to="/explore">
-            Explore
-          </NavLink>
-        </h3>
-        <h3>
-          <NavLink className="feed-link" to="/bookmark">
-            Bookmarks
-          </NavLink>
-        </h3>
-        <h3>
-          <button onClick={handleSignOut}> Sign Out </button>
-        </h3>
-      </div>
-      {/* ---------- navigation ------------ */}
+    <>
+      {/* <NavBar /> */}
+      <div className="feed-parent-div">
+        {/* ---------- navigation ------------ */}
+        <div className="feed-inner-div">
+          <div className="sidebar">
+            {" "}
+            <FontAwesomeIcon icon={faHouse} />
+            <h3>
+              <NavLink className="feed-link" to="/home">
+                Home
+              </NavLink>
+            </h3>{" "}
+          </div>
 
-      {/* ---------- users------------ */}
-      <div>
-        <input placeholder="search users..." className="user-search " />
-        <h3> Suggestions </h3>
-        <div className="user-parent-div">
-          {user.map((person) => (
-            <>
-              <div className="user-profiles">
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "3rem",
-                    justifyContent: "center",
-                  }}
-                >
-                  <h4>
-                    {person.firstName} {person.lastName}{" "}
-                  </h4>
-                  <button className="user-btn"> Follow </button>{" "}
-                </div>
+          <div className="sidebar">
+            {" "}
+            <FontAwesomeIcon icon={faCompass} />{" "}
+            <h3>
+              <NavLink className="feed-link" to="/explore">
+                Explore
+              </NavLink>
+            </h3>{" "}
+          </div>
 
-                {person.username}
-              </div>
-            </>
-          ))}
+          <div className="sidebar">
+            <FontAwesomeIcon icon={faBookmark} />{" "}
+            <h3>
+              <NavLink className="feed-link" to="/bookmark">
+                Bookmarks
+              </NavLink>
+            </h3>
+          </div>
+
+          <div className="sidebar">
+            <FontAwesomeIcon icon={faRightFromBracket} />{" "}
+            <h3 className="signout" title="sign out" onClick={handleSignOut}>
+              Sign Out
+            </h3>{" "}
+          </div>
         </div>
+        {/* ---------- navigation ------------ */}
+
+        {/* ---------- feeds ------------ */}
+
+        {/* ---------- feeds ------------ */}
+
+        {/* ---------- users------------ */}
+        <div>
+          <Users />
+        </div>
+        {/* ---------- users------------ */}
       </div>
-      {/* ---------- users------------ */}
-    </div>
+    </>
   );
 };

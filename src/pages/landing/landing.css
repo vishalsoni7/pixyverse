@@ -17,19 +17,19 @@
 .landing-heading {
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(to right, whitesmoke, #003153);
-  background-size: 200% auto;
+  background: linear-gradient(to right, whitesmoke, #003153, whitesmoke);
+  background-size: 300% auto;
   animation: gradientAnimation 5s linear infinite;
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 @keyframes gradientAnimation {
-  0% {
+  100% {
     background-position: 0%;
   }
   50% {
-    background-position: 50%;
+    background-position: 70%;
   }
 }
 
