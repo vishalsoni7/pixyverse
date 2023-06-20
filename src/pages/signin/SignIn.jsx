@@ -21,8 +21,8 @@ export const Signin = () => {
 
   const handleGuest = () => {
     const credential = {
-      username: "adarshbalak",
-      password: "adarshBalak123",
+      username: "adarshbalika",
+      password: "adarshBalika123",
     };
     userSignIn(credential, navigate);
   };

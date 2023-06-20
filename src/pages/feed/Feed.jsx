@@ -11,7 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "../feed/feed.css";
-// import { NavBar } from "../../component/navbar/Navbar";
+import { Explore } from "../explore/Explore";
+import { Switch } from "../../component/switch/switch";
 
 export const Feed = () => {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ export const Feed = () => {
 
   return (
     <>
-      {/* <NavBar /> */}
       <div className="feed-parent-div">
         {/* ---------- navigation ------------ */}
         <div className="feed-inner-div">
@@ -61,10 +61,16 @@ export const Feed = () => {
               Sign Out
             </h3>{" "}
           </div>
+
+          <div>
+            <Switch />
+          </div>
         </div>
         {/* ---------- navigation ------------ */}
 
         {/* ---------- feeds ------------ */}
+
+        <Explore />
 
         {/* ---------- feeds ------------ */}
 

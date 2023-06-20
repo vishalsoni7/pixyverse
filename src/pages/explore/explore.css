@@ -1,0 +1,61 @@
+.explore-parent-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40rem;
+  flex-wrap: wrap;
+  position: sticky;
+}
+
+.explore-A {
+  background: #00243d;
+  border: solid gray;
+  border-width: 0.000001px;
+}
+
+.explore-B {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.5rem;
+}
+
+.explore-C {
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.explore-D {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.explore-E {
+  text-align: left;
+  padding-top: 0.5rem;
+}
+
+.explore-F {
+  display: flex;
+  align-items: baseline;
+  padding-top: 1.1rem;
+  margin: 0.5rem;
+  gap: 5rem;
+}
+
+.explore-A:hover {
+  transition: 0.2s;
+  background: rgba(255, 255, 255, 0.058);
+}
+
+.explore-img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 5rem;
+  border: 1px solid;
+}
+
+.explore-username {
+  color: rgba(128, 128, 128, 0.916);
+}

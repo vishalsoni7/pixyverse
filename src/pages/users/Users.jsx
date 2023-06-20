@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../users/user.css";
 
 export const Users = () => {
@@ -10,7 +13,10 @@ export const Users = () => {
   return (
     <div className="user-main-div">
       <div className="user-search-div">
-        {" "}
+        <span className="search-icon">
+          {" "}
+          <FontAwesomeIcon icon={faMagnifyingGlass} />{" "}
+        </span>
         <input placeholder="Search Pixyverse" />{" "}
       </div>
 
@@ -18,7 +24,7 @@ export const Users = () => {
         <h2> Who to follow </h2>
         {users.map((person) => (
           <div className="user-div-B">
-            <div className="user-div-C ">
+            <div className="user-div-C">
               <div>
                 <img src={person?.profilePicture} className="profilePicture" />
               </div>{" "}

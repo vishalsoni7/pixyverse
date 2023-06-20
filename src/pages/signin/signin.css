@@ -9,8 +9,10 @@
 }
 
 .signin-container {
+  background: #00243d;
   gap: 0.5rem;
-  border: 0.5px solid white;
+  border: none;
+  /* border: 0.5px solid whitesmoke; */
   border-radius: 0.5rem;
   padding: 1rem;
   width: 20rem;
@@ -29,7 +31,7 @@
   width: -webkit-fill-available;
   background: none;
   padding: 0.7rem;
-  border: 0.5px solid white;
+  border: 0.1px solid white;
   border-radius: 5px;
   color: white;
   font-size: medium;

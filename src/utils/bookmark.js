@@ -15,9 +15,13 @@ const getAllBookmark = async (dispatch) => {
 
 const addToBookmark = async (postId) => {
   try {
-    const res = await axios.post(`/api/users/bookmark/${postId}`, {
-      headers: { authorization: encodedToken },
-    });
+    const res = await axios.post(
+      `/api/users/bookmark/${postId}`,
+      {},
+      {
+        headers: { authorization: encodedToken },
+      }
+    );
   } catch (error) {
     console.error(error);
   }
