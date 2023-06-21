@@ -1,19 +1,14 @@
 .user-main-div {
-  display: flex;
-  align-items: baseline;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
   margin-top: 0.5rem;
 }
 
 .user-div-A {
+  margin-top: 1rem;
   padding: 0.5rem;
   border-radius: 1rem;
   line-height: 2rem;
   background: #00243d;
   flex-wrap: wrap;
-
   border-width: 0.1px;
 }
 
@@ -70,6 +65,7 @@
   line-height: 28px;
   width: 100%;
   flex-wrap: wrap;
+  margin-bottom: 0.5rem;
 }
 
 .user-search-div input {

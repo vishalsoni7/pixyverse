@@ -28,7 +28,7 @@ export const Feed = () => {
         <div className="feed-inner-div">
           <div className="sidebar">
             {" "}
-            <FontAwesomeIcon icon={faHouse} />
+            <FontAwesomeIcon icon={faHouse} size="lg" />{" "}
             <h3>
               <NavLink className="feed-link" to="/home">
                 Home
@@ -38,7 +38,7 @@ export const Feed = () => {
 
           <div className="sidebar">
             {" "}
-            <FontAwesomeIcon icon={faCompass} />{" "}
+            <FontAwesomeIcon icon={faCompass} size="lg" />{" "}
             <h3>
               <NavLink className="feed-link" to="/explore">
                 Explore
@@ -47,7 +47,7 @@ export const Feed = () => {
           </div>
 
           <div className="sidebar">
-            <FontAwesomeIcon icon={faBookmark} />{" "}
+            <FontAwesomeIcon icon={faBookmark} size="lg" />
             <h3>
               <NavLink className="feed-link" to="/bookmark">
                 Bookmarks
@@ -56,7 +56,7 @@ export const Feed = () => {
           </div>
 
           <div className="sidebar">
-            <FontAwesomeIcon icon={faRightFromBracket} />{" "}
+            <FontAwesomeIcon icon={faRightFromBracket} size="lg" />{" "}
             <h3 className="signout" title="sign out" onClick={handleSignOut}>
               Sign Out
             </h3>{" "}

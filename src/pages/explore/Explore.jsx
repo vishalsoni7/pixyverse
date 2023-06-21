@@ -43,9 +43,9 @@ export const Explore = () => {
                   <div className="explore-E">
                     <span>{item.content} </span>
                     <div className="explore-F">
-                      <i class="fa-regular fa-heart fa-lg"></i>
-                      <i class="fa-regular fa-comment fa-lg"></i>
-                      <i class="fa-regular fa-bookmark fa-lg"></i>
+                      <i class="fa-regular fa-heart"></i>
+                      <i class="fa-regular fa-comment"></i>
+                      <i class="fa-regular fa-bookmark"></i>
                     </div>
                   </div>
                 </div>
