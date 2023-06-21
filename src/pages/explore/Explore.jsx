@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { DataContext } from "../../context/DataContext";
 
 import "../explore/explore.css";
@@ -6,7 +7,12 @@ import "../explore/explore.css";
 export const Explore = () => {
   const {
     initialState: { posts, users },
+    inBookmark,
+    addToBookmark,
+    removeFromBookmark,
   } = useContext(DataContext);
+
+  const { encodedToken } = useContext(AuthContext);
 
   const getuser = (clickedUserName) => {
     const filterUser = users.find(
@@ -24,7 +30,7 @@ export const Explore = () => {
       <div>
         {posts.map((item) => {
           return (
-            <div className="explore-A" key={item.id}>
+            <div className="explore-A" key={item._id}>
               <div className="explore-B">
                 <div>
                   <img
@@ -43,9 +49,24 @@ export const Explore = () => {
                   <div className="explore-E">
                     <span>{item.content} </span>
                     <div className="explore-F">
-                      <i class="fa-regular fa-heart"></i>
-                      <i class="fa-regular fa-comment"></i>
-                      <i class="fa-regular fa-bookmark"></i>
+                      <i title="like" className="fa-regular fa-heart"></i>
+                      <i title="comment" className="fa-regular fa-comment"></i>
+
+                      {!inBookmark(item._id) ? (
+                        <i
+                          title="add to bookmark"
+                          onClick={() => addToBookmark(encodedToken, item._id)}
+                          className="fa-regular fa-bookmark"
+                        ></i>
+                      ) : (
+                        <i
+                          title="remove from bookmark"
+                          onClick={() =>
+                            removeFromBookmark(encodedToken, item._id)
+                          }
+                          className="fa-solid fa-bookmark"
+                        ></i>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -57,6 +78,8 @@ export const Explore = () => {
     </div>
   );
 };
+
+// <i className="fa-solid fa-bookmark"></i>
 
 // <i class="fa-solid fa-heart"></i>
 // <i class="fa-solid fa-bookmark"></i>

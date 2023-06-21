@@ -40,7 +40,7 @@ export const Users = () => {
         <div className="user-div-A">
           {searchUser.length > 0 &&
             handleInput.map((person) => (
-              <div key={person.id} className="user-div-B">
+              <div key={person._id} className="user-div-B">
                 <div className="user-div-C">
                   <div>
                     <img
@@ -64,7 +64,7 @@ export const Users = () => {
       <div className="user-div-A">
         <h2> Who to follow </h2>
         {users.map((person) => (
-          <div key={person.id} className="user-div-B">
+          <div key={person._id} className="user-div-B">
             <div className="user-div-C">
               <div>
                 <img src={person?.profilePicture} className="profilePicture" />

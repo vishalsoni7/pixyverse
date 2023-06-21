@@ -5,6 +5,6 @@ export const datareducer = (state, action) => {
     case "ALL_POSTS":
       return { ...state, posts: action.payload };
     case "ALL-BOOKMARKS":
-      return { ...state, bookmark: action.payload };
+      return { ...state, bookmarks: action.payload };
   }
 };
