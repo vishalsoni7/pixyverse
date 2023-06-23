@@ -10,7 +10,5 @@ export const datareducer = (state, action) => {
       return { ...state, follow: action.payload };
     case "UNFOLLOW_USER":
       return { ...state, unfollow: action.payload };
-    // case "SORT_LATEST":
-    //   return { ...state, posts: action.payload };
   }
 };

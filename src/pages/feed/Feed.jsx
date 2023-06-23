@@ -20,10 +20,6 @@ export const Feed = () => {
 
   const navigate = useNavigate();
 
-  // const handleSignOut = () => {
-  //   signOut(navigate);
-  // };
-
   return (
     <>
       <div className="feed-parent-div">

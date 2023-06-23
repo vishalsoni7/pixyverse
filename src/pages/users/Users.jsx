@@ -4,7 +4,6 @@ import { DataContext } from "../../context/DataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../users/user.css";
-import { useEffect } from "react";
 
 export const Users = () => {
   const {

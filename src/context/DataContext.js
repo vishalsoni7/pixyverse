@@ -2,7 +2,7 @@ import axios from "axios";
 import { allPosts } from "../utils/postutils";
 import { getAllUsers } from "../utils/userutils";
 import { datareducer } from "../reducer/datareducer";
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 export const DataContext = createContext();
 
@@ -12,8 +12,6 @@ export const DataProvider = ({ children }) => {
     users: [],
     bookmarks: [],
   });
-
-  const encodedToken = localStorage.getItem("token");
 
   const likePost = async (encodedToken, postId) => {
     try {

@@ -112,8 +112,3 @@ export const Explore = () => {
     </div>
   );
 };
-
-//<i className="fa-solid fa-bookmark"></i>
-
-// <i class="fa-solid fa-heart"></i>
-// <i class="fa-solid fa-bookmark"></i>
