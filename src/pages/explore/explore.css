@@ -40,7 +40,7 @@
   display: flex;
   align-items: baseline;
   padding-top: 1rem;
-  /* margin: 0.5rem; */
+
   gap: 5rem;
 }
 
@@ -54,6 +54,14 @@
   width: 3rem;
   border-radius: 5rem;
   border: 1px solid;
+}
+
+.explore-post-img {
+  display: flex;
+  margin: 0.5rem 0rem;
+  border-radius: 0.5rem;
+  max-width: 100%;
+  max-height: 18rem;
 }
 
 .explore-username {

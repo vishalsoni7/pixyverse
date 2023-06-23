@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { DataContext } from "../../context/DataContext";
 import { getAllBookmark } from "../../utils/bookmark";
 
@@ -11,7 +10,7 @@ export const Bookmark = () => {
     dispatch,
   } = useContext(DataContext);
 
-  const { encodedToken } = useContext(AuthContext);
+  const encodedToken = localStorage.getItem("token");
 
   useEffect(() => {
     getAllBookmark(dispatch);

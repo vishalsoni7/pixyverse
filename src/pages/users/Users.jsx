@@ -4,13 +4,18 @@ import { DataContext } from "../../context/DataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../users/user.css";
+import { useEffect } from "react";
 
 export const Users = () => {
   const {
     initialState: { users },
+    followUser,
+    unfollowUser,
   } = useContext(DataContext);
 
   const [searchUser, setSearchUser] = useState("");
+
+  const encodedToken = localStorage.getItem("token");
 
   const handleInput =
     searchUser.trim()?.length > 0 &&
@@ -75,7 +80,19 @@ export const Users = () => {
               </div>
             </div>
             <div>
-              <button className="user-btn"> Follow </button>
+              <button
+                onClick={() => followUser(encodedToken, person._id)}
+                className="user-btn"
+              >
+                Follow
+              </button>
+
+              <button
+                onClick={() => unfollowUser(encodedToken, person._id)}
+                className="user-btn"
+              >
+                Unfollow
+              </button>
             </div>{" "}
           </div>
         ))}{" "}

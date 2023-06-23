@@ -1,13 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { userSignUp } from "../../utils/authutils";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import "../signup/signup.css";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export const SignUp = () => {
+  const { userSignUp } = useContext(AuthContext);
+
   const [signupDetails, setSignUpDetails] = useState({
     firstName: "",
     lastName: "",

@@ -23,9 +23,14 @@ const editUser = async () => {
 
 const followUser = async (followUserId) => {
   try {
-    const res = await axios.post(`/api/users/follow/${followUserId}`, {
-      headers: { authorization: encodedToken },
-    });
+    const res = await axios.post(
+      `/api/users/follow/${followUserId}`,
+      {},
+      {
+        headers: { authorization: encodedToken },
+      }
+    );
+    console.log(res);
   } catch (error) {
     console.error(error);
   }
@@ -33,9 +38,14 @@ const followUser = async (followUserId) => {
 
 const unfollowUser = async (followUserId) => {
   try {
-    const res = await axios.post(`/api/users/unfollow/${followUserId}`, {
-      headers: { authorization: encodedToken },
-    });
+    const res = await axios.post(
+      `/api/users/unfollow/${followUserId}`,
+      {},
+      {
+        headers: { authorization: encodedToken },
+      }
+    );
+    console.log(res);
   } catch (error) {
     console.error(error);
   }

@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { signOut } from "../../utils/authutils";
-import { Users } from "../users/Users";
+import { useContext } from "react";
+import "../feed/feed.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,16 +10,19 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
-import "../feed/feed.css";
+import { Users } from "../users/Users";
 import { Explore } from "../explore/Explore";
 import { Switch } from "../../component/switch/switch";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Feed = () => {
+  const { signOut } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    signOut(navigate);
-  };
+  // const handleSignOut = () => {
+  //   signOut(navigate);
+  // };
 
   return (
     <>
@@ -57,7 +60,7 @@ export const Feed = () => {
 
           <div className="sidebar">
             <FontAwesomeIcon icon={faRightFromBracket} size="lg" />{" "}
-            <h3 className="signout" title="sign out" onClick={handleSignOut}>
+            <h3 className="signout" title="sign out" onClick={signOut}>
               Sign Out
             </h3>{" "}
           </div>
@@ -75,9 +78,9 @@ export const Feed = () => {
         {/* ---------- feeds ------------ */}
 
         {/* ---------- users------------ */}
-        <div>
-          <Users />
-        </div>
+
+        <Users />
+
         {/* ---------- users------------ */}
       </div>
     </>

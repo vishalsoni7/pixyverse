@@ -13,6 +13,8 @@ export const users = [
     username: "adarshbalika",
     password: "adarshBalika123",
     bookmarks: [],
+    followers: [],
+    following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
     profilePicture:
@@ -26,6 +28,8 @@ export const users = [
     username: "vision",
     password: "vision123",
     bookmarks: [],
+    followers: [],
+    following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
     profilePicture:
@@ -39,6 +43,8 @@ export const users = [
     username: "tonystark",
     password: "tonystark123",
     bookmarks: [],
+    followers: [],
+    following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
     profilePicture:
@@ -53,6 +59,8 @@ export const users = [
     username: "steverogers",
     password: "steverogers123",
     bookmarks: [],
+    followers: [],
+    following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
     profilePicture: "https://wallpaperaccess.com/full/55565.jpg",
@@ -65,6 +73,8 @@ export const users = [
     username: "t'challa",
     password: "t'challa123",
     bookmarks: [],
+    followers: [],
+    following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
     profilePicture:

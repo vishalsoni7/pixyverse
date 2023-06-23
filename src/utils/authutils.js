@@ -44,7 +44,7 @@ export const userSignUp = async (signupDetails, navigate) => {
     if (status === 201) {
       localStorage.setItem("signUpDetails", JSON.stringify(createdUser));
       localStorage.setItem("token", JSON.stringify(encodedToken));
-      //   setIsLoggedIn(true);
+
       navigate("/home");
       toast.success(`Welcome ${signupDetails.username}.`, {
         style: {
@@ -58,6 +58,7 @@ export const userSignUp = async (signupDetails, navigate) => {
     }
   } catch (error) {
     console.error(error);
+
     toast.error("Incorrect username or password", {
       style: {
         fontSize: "medium",

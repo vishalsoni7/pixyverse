@@ -16,6 +16,7 @@ export const createPost = async () => {
     const res = await axios.post("/api/posts", {
       headers: { authorization: encodedToken },
     });
+    console.log(res);
   } catch (error) {
     console.error(error);
   }
@@ -36,3 +37,14 @@ export const editPost = async () => {
     console.error(error);
   }
 };
+
+// export const deletePost = async (dispatch, encodedToken, postId) => {
+//   try {
+//     const res = await axios.delete(`/api/posts/${postId}`, {
+//       headers: { authorization: encodedToken },
+//     });
+//     dispatch({ type: "ALL_POSTS", payload: res.data.posts });
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };

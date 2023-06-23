@@ -2,12 +2,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../signin/signin.css";
 
-import { userSignIn } from "../../utils/authutils";
+// import { userSignIn } from "../../utils/authutils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Signin = () => {
+  const { isSignIn, userSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [signinDetails, setSignInDetails] = useState({
@@ -42,10 +45,7 @@ export const Signin = () => {
             <p>Username</p>
             <input
               onChange={(e) =>
-                setSignInDetails({
-                  ...signinDetails,
-                  username: e.target.value,
-                })
+                setSignInDetails({ ...signinDetails, username: e.target.value })
               }
               placeholder="username"
               className="signin-input"

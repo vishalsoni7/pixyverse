@@ -16,6 +16,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -29,6 +32,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "vision",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -41,6 +47,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "t'challa",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -53,6 +62,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "vision",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -61,11 +73,14 @@ export const posts = [
     _id: uuid(),
     content: "I am Iron man.",
     likes: {
-      likeCount: 3000,
+      likeCount: 2999,
       likedBy: [],
       dislikedBy: [],
     },
     username: "tonystark",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -79,6 +94,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "steverogers",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -92,6 +110,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "t'challa",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -104,6 +125,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "steverogers",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -116,6 +140,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "tonystark",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -130,6 +157,9 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
+    postImage: [
+      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
