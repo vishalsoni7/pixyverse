@@ -1,19 +1,16 @@
 .feed-link {
   text-decoration: none;
-  color: white;
+  color: whitesmoke;
 }
 .feed-parent-div {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  position: relative;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  display: -webkit-inline-box;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .feed-inner-div {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   justify-content: flex-start;
   flex-direction: column;
 }
@@ -25,14 +22,37 @@
 .sidebar {
   margin: 0.5rem;
   line-height: 0;
-  padding: 0rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-inner-div {
   display: flex;
   align-items: baseline;
-  justify-content: space-around;
-  gap: 1rem;
-  border-radius: 5rem;
+  gap: 0.5rem;
+  padding: 0rem 1rem;
 }
-.sidebar:hover {
-  transition: 0.2s;
+
+.sidebar-inner-div:hover {
+  border-radius: 5rem;
+  transition: 0.3s;
   background: rgba(255, 255, 255, 0.058);
+}
+
+.feed-user-div {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.feed-user-about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.feed-username {
+  font-size: small;
+  color: rgba(128, 128, 128, 0.916);
 }

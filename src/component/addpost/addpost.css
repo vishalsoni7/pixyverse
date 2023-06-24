@@ -3,6 +3,7 @@
   align-items: flex-start;
   flex-direction: column;
   border: solid gray;
+  border-top: none;
   border-width: 0.000001px;
   background: #00243d;
   color: white;

@@ -13,38 +13,40 @@ export const AddPost = () => {
   };
 
   return (
-    <div className="add-post-div">
-      <div>
-        <input
-          className="add-post-input"
-          placeholder="what's happning?"
-          type="text"
-        />{" "}
-      </div>
-      <div>
-        {selectedImage && (
-          <div>
-            <img
-              className="add-post-div-img"
-              src={selectedImage}
-              alt="Selected"
-            />
-          </div>
-        )}
+    <>
+      <div className="add-post-div">
         <div>
           <input
-            className="add-post-btn"
-            id="file"
-            type="file"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-          <label htmlFor="file">
-            <i className="fa-regular fa-image fa-lg"></i>
-          </label>
-          <button> Post </button>
+            className="add-post-input"
+            placeholder="what's happning?"
+            type="text"
+          />{" "}
+        </div>
+        <div>
+          {selectedImage && (
+            <div>
+              <img
+                className="add-post-div-img"
+                src={selectedImage}
+                alt="Selected"
+              />
+            </div>
+          )}
+          <div>
+            <input
+              className="add-post-btn"
+              id="file"
+              type="file"
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+            <label htmlFor="file">
+              <i className="fa-regular fa-image fa-lg"></i>
+            </label>
+            <button> Post </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -5,7 +5,7 @@ import { Signin } from "../pages/signin/SignIn";
 import { SignUp } from "../pages/signup/SignUp";
 import { Feed } from "../pages/feed/Feed";
 import { Explore } from "../pages/explore/Explore";
-import { Bookmark } from "../pages/bookmark/Bookemark";
+import { Bookmark } from "../pages/bookmark/BookMark";
 
 export const AppRouts = () => {
   return (

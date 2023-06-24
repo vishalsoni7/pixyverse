@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import "../feed/feed.css";
 
@@ -17,67 +17,65 @@ import { AuthContext } from "../../context/AuthContext";
 
 export const Feed = () => {
   const { signOut } = useContext(AuthContext);
-
-  const navigate = useNavigate();
+  const loginUser = JSON.parse(localStorage.getItem("user"));
 
   return (
     <>
       <div className="feed-parent-div">
-        {/* ---------- navigation ------------ */}
         <div className="feed-inner-div">
           <div className="sidebar">
-            {" "}
-            <FontAwesomeIcon icon={faHouse} size="lg" />{" "}
-            <h3>
-              <NavLink className="feed-link" to="/home">
-                Home
-              </NavLink>
-            </h3>{" "}
-          </div>
-
-          <div className="sidebar">
-            {" "}
-            <FontAwesomeIcon icon={faCompass} size="lg" />{" "}
-            <h3>
-              <NavLink className="feed-link" to="/explore">
-                Explore
-              </NavLink>
-            </h3>{" "}
-          </div>
-
-          <div className="sidebar">
-            <FontAwesomeIcon icon={faBookmark} size="lg" />
-            <h3>
-              <NavLink className="feed-link" to="/bookmark">
-                Bookmarks
-              </NavLink>
-            </h3>
-          </div>
-
-          <div className="sidebar">
-            <FontAwesomeIcon icon={faRightFromBracket} size="lg" />{" "}
-            <h3 className="signout" title="sign out" onClick={signOut}>
-              Sign Out
-            </h3>{" "}
+            <div className="sidebar-inner-div">
+              <FontAwesomeIcon icon={faHouse} size="lg" />{" "}
+              <h3>
+                <NavLink className="feed-link" to="/home">
+                  Home
+                </NavLink>
+              </h3>
+            </div>
+            <div className="sidebar-inner-div">
+              <FontAwesomeIcon icon={faCompass} size="lg" />{" "}
+              <h3>
+                <NavLink className="feed-link" to="/explore">
+                  Explore
+                </NavLink>
+              </h3>{" "}
+            </div>
+            <div className="sidebar-inner-div">
+              <FontAwesomeIcon icon={faBookmark} size="lg" />
+              <h3>
+                <NavLink className="feed-link" to="/bookmark">
+                  Bookmarks
+                </NavLink>
+              </h3>
+            </div>
+            <div className="sidebar-inner-div">
+              <FontAwesomeIcon icon={faRightFromBracket} size="lg" />{" "}
+              <h3 className="signout" title="sign out" onClick={signOut}>
+                Sign Out
+              </h3>{" "}
+            </div>
           </div>
 
           <div>
             <Switch />
           </div>
-        </div>
-        {/* ---------- navigation ------------ */}
 
-        {/* ---------- feeds ------------ */}
+          <NavLink className="feed-link" to="userprofile">
+            {" "}
+            <div className="feed-user-div">
+              <img src={loginUser.profilePicture} className="profilePicture" />
+              <div className="feed-user-about">
+                <span> {loginUser.name} </span>
+                <span className="feed-username">
+                  @{loginUser.username}{" "}
+                </span>{" "}
+              </div>
+            </div>
+          </NavLink>
+        </div>
 
         <Explore />
-
-        {/* ---------- feeds ------------ */}
-
-        {/* ---------- users------------ */}
-
         <Users />
-
-        {/* ---------- users------------ */}
       </div>
     </>
   );

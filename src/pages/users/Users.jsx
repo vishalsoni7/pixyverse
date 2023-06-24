@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../context/DataContext";
+import "../users/user.css";
 
+import { DataContext } from "../../context/DataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import "../users/user.css";
 
 export const Users = () => {
   const {
@@ -14,13 +14,19 @@ export const Users = () => {
 
   const [searchUser, setSearchUser] = useState("");
 
-  const encodedToken = localStorage.getItem("token");
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const showUser = users.filter(
+    (person) => person.username !== currentUser.username
+  );
 
   const handleInput =
     searchUser.trim()?.length > 0 &&
-    users.filter(({ name }) =>
+    showUser.filter(({ name }) =>
       name.toLowerCase().includes(searchUser.trim().toLocaleLowerCase())
     );
+
+  const encodedToken = localStorage.getItem("token");
 
   return (
     <div className="user-main-div">
@@ -67,7 +73,7 @@ export const Users = () => {
 
       <div className="user-div-A">
         <h2> Who to follow </h2>
-        {users.map((person) => (
+        {showUser.map((person) => (
           <div key={person._id} className="user-div-B">
             <div className="user-div-C">
               <div>
@@ -84,13 +90,6 @@ export const Users = () => {
                 className="user-btn"
               >
                 Follow
-              </button>
-
-              <button
-                onClick={() => unfollowUser(encodedToken, person._id)}
-                className="user-btn"
-              >
-                Unfollow
               </button>
             </div>{" "}
           </div>

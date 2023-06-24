@@ -16,9 +16,7 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    postImage: [
-      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
-    ],
+    postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -32,9 +30,7 @@ export const posts = [
       dislikedBy: [],
     },
     username: "vision",
-    postImage: [
-      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
-    ],
+    postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -47,9 +43,7 @@ export const posts = [
       dislikedBy: [],
     },
     username: "t'challa",
-    postImage: [
-      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
-    ],
+    postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -62,9 +56,7 @@ export const posts = [
       dislikedBy: [],
     },
     username: "vision",
-    postImage: [
-      "https://i.pinimg.com/564x/df/d3/4b/dfd34bf5f68287918740898787c17568.jpg",
-    ],
+    postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

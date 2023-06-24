@@ -1,9 +1,7 @@
 .App {
   text-align: center;
   font-family: "Noto Sans", sans-serif;
-  /* display: flex;
-  align-items: flex-start;
-  justify-content: space-around; */
+  flex-wrap: wrap;
 }
 
 body {

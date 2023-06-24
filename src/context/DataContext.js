@@ -94,11 +94,7 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-      dispatch({
-        type: "FOLLOW_USER",
-        payload: res?.data?.followUser,
-      });
-      console.log(res);
+      return res;
     } catch (error) {
       console.error(error);
     }
@@ -113,8 +109,7 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-
-      console.log(res);
+      return res;
     } catch (error) {
       console.error(error);
     }

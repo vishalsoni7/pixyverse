@@ -6,9 +6,9 @@ export const datareducer = (state, action) => {
       return { ...state, posts: action.payload };
     case "ALL-BOOKMARKS":
       return { ...state, bookmarks: action.payload };
-    case "FOLLOW_USER":
-      return { ...state, follow: action.payload };
-    case "UNFOLLOW_USER":
-      return { ...state, unfollow: action.payload };
+    // case "FOLLOW_USER":
+    //   return { ...state, users: action.payload };
+    // case "UNFOLLOW_USER":
+    //   return { ...state, unfollow: action.payload };
   }
 };
