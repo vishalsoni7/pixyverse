@@ -6,6 +6,7 @@ import { SignUp } from "../pages/signup/SignUp";
 import { Feed } from "../pages/feed/Feed";
 import { Explore } from "../pages/explore/Explore";
 import { Bookmark } from "../pages/bookmark/BookMark";
+import { UserProfile } from "../pages/userprofile/UserProfile";
 
 export const AppRouts = () => {
   return (
@@ -17,6 +18,7 @@ export const AppRouts = () => {
         <Route path="/explore" element={<Explore />} />
         <Route path="/home" element={<Feed />} />
         <Route path="/bookmark" element={<Bookmark />} />
+        <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
     </div>
   );

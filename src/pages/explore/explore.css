@@ -4,7 +4,6 @@
   justify-content: center;
   width: 40rem;
   flex-wrap: wrap;
-  position: sticky;
 }
 
 .explore-A {
@@ -38,10 +37,11 @@
 
 .explore-F {
   display: flex;
-  align-items: baseline;
-  padding-top: 1rem;
-
+  align-items: flex-start;
   gap: 5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  padding-bottom: 0;
 }
 
 .explore-A:hover {

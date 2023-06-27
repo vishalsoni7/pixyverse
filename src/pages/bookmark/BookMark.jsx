@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import { DataContext } from "../../context/DataContext";
 import { getAllBookmark } from "../../utils/bookmark";
+import { SideBar } from "../sidebar/SideBar";
+import { Users } from "../users/Users";
 
 export const Bookmark = () => {
   const {
@@ -28,9 +30,18 @@ export const Bookmark = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        gap: "1rem",
+        alignItems: "flex-start",
+        justifyContent: "space-evenly",
+        flexWrap: "wrap",
+      }}
+    >
+      <SideBar />
       <div>
-        <h2> Bookmarks </h2>
+        <h2 style={{ lineHeight: 0 }}> Bookmarks </h2>
         {handleBookmark.map((item) => {
           return (
             <div className="explore-A" key={item._id}>
@@ -68,6 +79,7 @@ export const Bookmark = () => {
           );
         })}
       </div>
+      <Users />
     </div>
   );
 };

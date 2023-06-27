@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { allPosts } from "../utils/postutils";
 import { getAllUsers } from "../utils/userutils";
 import { datareducer } from "../reducer/datareducer";
@@ -23,8 +24,26 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
+      toast.success("Post liked. ♥️", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 
@@ -38,8 +57,26 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
+      toast.success("Post disliked. 🙃", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 
@@ -49,8 +86,26 @@ export const DataProvider = ({ children }) => {
         headers: { authorization: encodedToken },
       });
       dispatch({ type: "ALL_POSTS", payload: res?.data?.posts });
+      toast.success("Post deleted.", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 
@@ -64,8 +119,26 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL-BOOKMARKS", payload: res?.data?.bookmarks });
+      toast.success("Bookmarked.", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 
@@ -78,10 +151,27 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-
       dispatch({ type: "ALL-BOOKMARKS", payload: res?.data?.bookmarks });
+      toast.error("Removed from bookmark.", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 

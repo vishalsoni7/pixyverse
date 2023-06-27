@@ -36,13 +36,13 @@
 
 .user-div-C {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 }
 
 .user-div-D {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   letter-spacing: 1px;
   line-height: 1.5;
@@ -102,6 +102,7 @@ input:hover {
 }
 
 .profilePicture {
+  align-items: center;
   height: 3rem;
   width: 3rem;
   border-radius: 5rem;
