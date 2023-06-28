@@ -16,8 +16,10 @@ export const Users = () => {
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
+  const encodedToken = localStorage.getItem("token");
+
   const showUser = users.filter(
-    (person) => person.username !== currentUser.username
+    (person) => person?.username !== currentUser?.username
   );
 
   const handleInput =
@@ -26,7 +28,9 @@ export const Users = () => {
       name.toLowerCase().includes(searchUser.trim().toLocaleLowerCase())
     );
 
-  const encodedToken = localStorage.getItem("token");
+  const handlefollow = (personId) => {
+    return showUser.find((item) => item._id == personId);
+  };
 
   return (
     <div className="user-main-div">
@@ -85,12 +89,21 @@ export const Users = () => {
               </div>
             </div>
             <div>
-              <button
-                onClick={() => followUser(encodedToken, person._id)}
-                className="user-btn"
-              >
-                Follow
-              </button>
+              {!handlefollow(person._id) ? (
+                <button
+                  onClick={() => unfollowUser(encodedToken, person._id)}
+                  className="user-btn"
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                  onClick={() => followUser(encodedToken, person._id)}
+                  className="user-btn"
+                >
+                  Follow
+                </button>
+              )}
             </div>{" "}
           </div>
         ))}{" "}

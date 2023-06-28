@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
   const userSignIn = async (creds) => {
     try {
       const {
@@ -104,7 +103,6 @@ export const AuthProvider = ({ children }) => {
     userSignIn,
     userSignUp,
     signOut,
-    user,
   };
 
   return (

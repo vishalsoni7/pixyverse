@@ -22,29 +22,25 @@ export const UserProfile = () => {
     inBookmark,
     addToBookmark,
     removeFromBookmark,
+    user,
   } = useContext(DataContext);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-
   const showMyPosts = posts.filter(
-    ({ username }) => username === user.username
+    ({ username }) => username === user?.username
   );
 
   const getuser = (clickedUserName) => {
-    const filterUser = users.find(
-      (user) => user.username.toLowerCase() === clickedUserName.toLowerCase()
+    const filterUser = users?.find(
+      (user) => user?.username.toLowerCase() === clickedUserName.toLowerCase()
     );
     return {
-      pic: filterUser.profilePicture,
-      name: filterUser.name,
-      username: filterUser.username,
+      pic: filterUser?.profilePicture,
+      name: filterUser?.name,
+      username: filterUser?.username,
     };
   };
 
   const encodedToken = localStorage.getItem("token");
-
-  console.log({ followers: user.followers });
-  console.log({ following: user.following });
 
   return (
     <div className="userprofile-parent-div">
@@ -56,13 +52,13 @@ export const UserProfile = () => {
             <FontAwesomeIcon icon={faArrowLeft} size="lg" className="arrow" />
 
             <div className="userprofile-center-div-B">
-              <p> {user.name} </p> <span> {showMyPosts.length} Posts </span>
+              <p> {user?.name} </p> <span> {showMyPosts?.length} Posts </span>
             </div>
           </div>
           <div className="A">
             <div>
               <img
-                src={user.profilePicture}
+                src={user?.profilePicture}
                 className="user-details-profile-picture"
                 alt="current-user-picture"
               />
@@ -71,8 +67,8 @@ export const UserProfile = () => {
             <div className="B">
               <div className="C">
                 <div className="D">
-                  <h2> {user.name} </h2>
-                  <span> @{user.username} </span>
+                  <h2> {user?.name} </h2>
+                  <span> @{user?.username} </span>
                 </div>
                 <div>
                   {" "}
@@ -81,7 +77,7 @@ export const UserProfile = () => {
               </div>
 
               <div className="F">
-                <p> {user.bio} </p>
+                <p> {user?.bio} </p>
                 <div className="E">
                   <FontAwesomeIcon
                     icon={faLink}
@@ -90,16 +86,16 @@ export const UserProfile = () => {
                   <a
                     className="user-details-bio"
                     target="_blank"
-                    href={user.link}
+                    href={user?.link}
                   >
-                    {user.link}
+                    {user?.link}
                   </a>
                 </div>
               </div>
 
               <div className="userprofile-about">
-                <p> {user.followers.length} Followers </p>{" "}
-                <p> {user.following.length} Following </p>
+                <p> {user?.followers?.length} Followers </p>{" "}
+                <p> {user?.following?.length} Following </p>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { allPosts } from "../utils/postutils";
 import { getAllUsers } from "../utils/userutils";
 import { datareducer } from "../reducer/datareducer";
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 export const DataContext = createContext();
 
@@ -13,6 +13,12 @@ export const DataProvider = ({ children }) => {
     users: [],
     bookmarks: [],
   });
+
+  // console.log(initialState.posts, initialState.users);
+
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const [user, setUser] = useState(currentUser);
 
   const likePost = async (encodedToken, postId) => {
     try {
@@ -184,7 +190,7 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-      return res;
+      setUser(res.data.user);
     } catch (error) {
       console.error(error);
     }
@@ -199,7 +205,7 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-      return res;
+      setUser(res.data.user);
     } catch (error) {
       console.error(error);
     }
@@ -218,6 +224,10 @@ export const DataProvider = ({ children }) => {
     allPosts(dispatch);
   }, []);
 
+  // useEffect(() => {
+  //   singleUser(currentUser._id);
+  // }, []);
+
   const values = {
     initialState,
     dispatch,
@@ -230,6 +240,7 @@ export const DataProvider = ({ children }) => {
     dislikePost,
     followUser,
     unfollowUser,
+    user,
   };
   return (
     <>
