@@ -9,6 +9,10 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isSignIn, setIsSignIn] = useState(false);
 
+  const [user, setUser] = useState({});
+
+  const [editModal, setEditModal] = useState(false);
+
   const navigate = useNavigate();
 
   const userSignIn = async (creds) => {
@@ -20,6 +24,7 @@ export const AuthProvider = ({ children }) => {
       if (status === 200) {
         localStorage.setItem("user", JSON.stringify(foundUser));
         localStorage.setItem("token", JSON.stringify(encodedToken));
+        setUser(foundUser);
         setIsSignIn(true);
         navigate("/home");
         toast.success(`Welcome ${foundUser.username}.`, {
@@ -55,6 +60,7 @@ export const AuthProvider = ({ children }) => {
       if (status === 201) {
         localStorage.setItem("user", JSON.stringify(createdUser));
         localStorage.setItem("token", JSON.stringify(encodedToken));
+        setUser(createdUser);
         setIsSignIn(true);
         navigate("/home");
         toast.success(`Welcome ${signupDetails.username}.`, {
@@ -98,11 +104,35 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const editUser = async (userData, encodedToken, setEditModal) => {
+    try {
+      const res = await axios.post(
+        "/api/users/edit",
+        { userData },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      if (res.status === 201) {
+        setUser(res.data.user);
+        setEditModal(false);
+      }
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const values = {
     isSignIn,
     userSignIn,
     userSignUp,
     signOut,
+    user,
+    setUser,
+    editModal,
+    setEditModal,
+    editUser,
   };
 
   return (

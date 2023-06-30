@@ -17,7 +17,7 @@ export const posts = [
     },
     username: "adarshbalika",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("August 30, 2021 03:15:30"),
     updatedAt: formatDate(),
   },
   {
@@ -30,7 +30,7 @@ export const posts = [
     },
     username: "vision",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("August 23, 2001 02:15:30"),
     updatedAt: formatDate(),
   },
   {
@@ -43,7 +43,7 @@ export const posts = [
     },
     username: "t'challa",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("August 03, 2022 02:05:04"),
     updatedAt: formatDate(),
   },
   {
@@ -56,7 +56,7 @@ export const posts = [
     },
     username: "vision",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("July 12, 2021 03:15:30"),
     updatedAt: formatDate(),
   },
 
@@ -70,7 +70,7 @@ export const posts = [
     },
     username: "tonystark",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("Jun 20, 2022 07:05:30"),
     updatedAt: formatDate(),
   },
 
@@ -84,7 +84,7 @@ export const posts = [
     },
     username: "steverogers",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("December 28, 2022 01:15:30"),
     updatedAt: formatDate(),
   },
   {
@@ -92,39 +92,39 @@ export const posts = [
     content:
       "The Black Panther has been a protector of Wakanda for generations. And now, it is time to show the outside world who we are.",
     likes: {
-      likeCount: 100,
+      likeCount: 1300,
       likedBy: [],
       dislikedBy: [],
     },
     username: "t'challa",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("June 27, 2023 03:15:30"),
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
     content: "AVENGERS! ASSEMBLE.",
     likes: {
-      likeCount: 10000,
+      likeCount: 9999,
       likedBy: [],
       dislikedBy: [],
     },
     username: "steverogers",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("November 20, 2022 03:15:30"),
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
     content: "Billionaire Genius Playboy Philanthropist.",
     likes: {
-      likeCount: 344,
+      likeCount: 2243,
       likedBy: [],
       dislikedBy: [],
     },
     username: "tonystark",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("February 27, 2023 03:15:30"),
     updatedAt: formatDate(),
   },
 
@@ -132,13 +132,13 @@ export const posts = [
     _id: uuid(),
     content: "At vero eos et accusamus et iusto odio dignissimos ducimus.",
     likes: {
-      likeCount: 43,
+      likeCount: 2300,
       likedBy: [],
       dislikedBy: [],
     },
     username: "adarshbalika",
     postImage: ["https://wallpaperaccess.com/full/55565.jpg"],
-    createdAt: formatDate(),
+    createdAt: new Date("May 30, 2023 03:15:30"),
     updatedAt: formatDate(),
   },
 ];

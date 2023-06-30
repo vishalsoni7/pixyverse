@@ -11,9 +11,15 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { DataContext } from "../../context/DataContext";
+
 export const SideBar = () => {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, isSignIn } = useContext(AuthContext);
+  const { allBookmark } = useContext(DataContext);
   const loginUser = JSON.parse(localStorage.getItem("user"));
+
+  const encodedToken = localStorage.getItem("token");
+
   return (
     <>
       <div className="feed-inner-div">
@@ -26,6 +32,7 @@ export const SideBar = () => {
               </NavLink>
             </h3>
           </div>
+
           <div className="sidebar-inner-div">
             <FontAwesomeIcon icon={faCompass} size="lg" />{" "}
             <h3>
@@ -34,14 +41,16 @@ export const SideBar = () => {
               </NavLink>
             </h3>{" "}
           </div>
+
           <div className="sidebar-inner-div">
             <FontAwesomeIcon icon={faBookmark} size="lg" />
-            <h3>
+            <h3 onClick={() => allBookmark(encodedToken)}>
               <NavLink className="feed-link" to="/bookmark">
                 Bookmarks
               </NavLink>
             </h3>
           </div>
+
           <div className="sidebar-inner-div">
             <FontAwesomeIcon icon={faRightFromBracket} size="lg" />{" "}
             <h3 className="signout" title="sign out" onClick={signOut}>
@@ -50,17 +59,19 @@ export const SideBar = () => {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <Switch />
-        </div>
+        </div> */}
 
         <NavLink className="feed-link" to="/userprofile">
           {" "}
           <div className="feed-user-div">
-            <img src={loginUser.profilePicture} className="profilePicture" />
+            <img src={loginUser?.profilePicture} className="profilePicture" />
             <div className="feed-user-about">
-              <span> {loginUser.name} </span>
-              <span className="feed-username">@{loginUser.username} </span>{" "}
+              <span> {loginUser?.name} </span>
+              <span className="feed-username">
+                @{loginUser?.username}{" "}
+              </span>{" "}
             </div>
           </div>
         </NavLink>

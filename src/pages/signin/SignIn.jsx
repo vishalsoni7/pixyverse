@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../signin/signin.css";
+import toast from "react-hot-toast";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
@@ -16,8 +17,24 @@ export const Signin = () => {
     password: "",
   });
 
-  const handleLogIn = () => {
-    userSignIn(signinDetails, navigate);
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    if (
+      signinDetails.username.trim() === "" ||
+      signinDetails.password.trim() === ""
+    ) {
+      toast.error("Please Details!", {
+        style: {
+          fontSize: "large",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
+    } else {
+      userSignIn(signinDetails, navigate);
+    }
   };
 
   const handleGuest = () => {
@@ -45,7 +62,7 @@ export const Signin = () => {
               onChange={(e) =>
                 setSignInDetails({ ...signinDetails, username: e.target.value })
               }
-              placeholder="username"
+              placeholder="tonystark"
               className="signin-input"
               type="text"
             />

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { DataContext } from "../../context/DataContext";
-import { getAllBookmark } from "../../utils/bookmark";
+
 import { SideBar } from "../sidebar/SideBar";
 import { Users } from "../users/Users";
 
@@ -13,10 +13,6 @@ export const Bookmark = () => {
   } = useContext(DataContext);
 
   const encodedToken = localStorage.getItem("token");
-
-  useEffect(() => {
-    getAllBookmark(dispatch);
-  }, []);
 
   const getuser = (clickedUserName) => {
     const filterUser = users.find(
@@ -32,16 +28,18 @@ export const Bookmark = () => {
   return (
     <div
       style={{
-        display: "flex",
-        gap: "1rem",
-        alignItems: "flex-start",
-        justifyContent: "space-evenly",
+        display: "-webkit-inline-flex",
+        gap: "2rem",
         flexWrap: "wrap",
       }}
     >
       <SideBar />
-      <div>
-        <h2 style={{ lineHeight: 0 }}> Bookmarks </h2>
+      <div style={{ width: "43rem" }}>
+        <div style={{}}> </div>
+        <h3 style={{ textAlign: "left", lineHeight: 0, background: "red" }}>
+          {" "}
+          Bookmark Posts{" "}
+        </h3>{" "}
         {handleBookmark.map((item) => {
           return (
             <div className="explore-A" key={item._id}>

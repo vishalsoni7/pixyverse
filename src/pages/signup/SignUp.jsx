@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
@@ -9,20 +10,48 @@ import { AuthContext } from "../../context/AuthContext";
 
 export const SignUp = () => {
   const { userSignUp } = useContext(AuthContext);
+  const [isDisable, setIsDisable] = useState(true);
 
   const [signupDetails, setSignUpDetails] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const navigate = useNavigate();
 
-  const signUpHandler = () => {
-    userSignUp(signupDetails, navigate);
+  const handleBtn = () => {
+    setIsDisable((pre) => !pre);
+  };
+
+  const signUpHandler = (e) => {
+    e.preventDefault();
+    if (
+      signupDetails.name.trim() === "" ||
+      signupDetails.username.trim() === "" ||
+      signupDetails.email.trim() === "" ||
+      signupDetails.password.trim() === "" ||
+      signupDetails.confirmPassword.trim() === ""
+    ) {
+      toast.error("Please Details!", {
+        style: {
+          padding: ".5rem",
+          background: "#252525",
+          color: "whitesmoke",
+        },
+      });
+    } else if (signupDetails.password !== signupDetails.confirmPassword) {
+      toast.error("Password does not matched.", {
+        style: {
+          padding: ".5rem",
+          background: "#252525",
+          color: "whitesmoke",
+        },
+      });
+    } else {
+      userSignUp(signupDetails, navigate);
+    }
   };
 
   return (
@@ -34,23 +63,12 @@ export const SignUp = () => {
         </h2>
 
         <div className="signup-div">
-          <p>First Name</p>
+          <p>Full Name</p>
           <input
             onChange={(e) =>
-              setSignUpDetails({ ...signupDetails, firstName: e.target.value })
+              setSignUpDetails({ ...signupDetails, name: e.target.value })
             }
-            placeholder="Vishal"
-            className="signup-input"
-            type="text"
-          />
-        </div>
-        <div className="signup-div">
-          <p>Last Name</p>
-          <input
-            onChange={(e) =>
-              setSignUpDetails({ ...signupDetails, lastName: e.target.value })
-            }
-            placeholder="Soni"
+            placeholder="Vishal Soni"
             className="signup-input"
             type="text"
           />
@@ -108,11 +126,15 @@ export const SignUp = () => {
         </div>
 
         <div className="signup-checkbox-div">
-          <input type="checkbox" />
+          <input type="checkbox" onClick={handleBtn} />
           <p> I accept all Terms & Conditions</p>
         </div>
 
-        <button onClick={signUpHandler} className="signup-btn">
+        <button
+          disabled={isDisable}
+          onClick={signUpHandler}
+          className="signup-btn"
+        >
           Create New Account
         </button>
         <NavLink className="signup-page-link" to="/signin">
@@ -122,3 +144,17 @@ export const SignUp = () => {
     </div>
   );
 };
+
+{
+  /* <div className="signup-div">
+          <p>Last Name</p>
+          <input
+            onChange={(e) =>
+              setSignUpDetails({ ...signupDetails, lastName: e.target.value })
+            }
+            placeholder="Soni"
+            className="signup-input"
+            type="text"
+          />
+        </div> */
+}

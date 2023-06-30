@@ -4,6 +4,7 @@ import "../users/user.css";
 import { DataContext } from "../../context/DataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Users = () => {
   const {
@@ -11,25 +12,24 @@ export const Users = () => {
     followUser,
     unfollowUser,
   } = useContext(DataContext);
+  const { user } = useContext(AuthContext);
 
   const [searchUser, setSearchUser] = useState("");
 
-  const currentUser = JSON.parse(localStorage.getItem("user"));
-
   const encodedToken = localStorage.getItem("token");
 
-  const showUser = users.filter(
-    (person) => person?.username !== currentUser?.username
+  const showUser = users?.filter(
+    (person) => person?.username !== user?.username
   );
 
   const handleInput =
-    searchUser.trim()?.length > 0 &&
-    showUser.filter(({ name }) =>
-      name.toLowerCase().includes(searchUser.trim().toLocaleLowerCase())
+    searchUser?.trim()?.length > 0 &&
+    showUser?.filter(({ name }) =>
+      name.toLowerCase()?.includes(searchUser.trim().toLocaleLowerCase())
     );
 
-  const handlefollow = (personId) => {
-    return showUser.find((item) => item._id == personId);
+  const handleFollow = (id) => {
+    return user?.following?.some((item) => item._id === id);
   };
 
   return (
@@ -89,7 +89,7 @@ export const Users = () => {
               </div>
             </div>
             <div>
-              {!handlefollow(person._id) ? (
+              {handleFollow(person._id) ? (
                 <button
                   onClick={() => unfollowUser(encodedToken, person._id)}
                   className="user-btn"

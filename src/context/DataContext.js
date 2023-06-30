@@ -3,7 +3,8 @@ import toast from "react-hot-toast";
 import { allPosts } from "../utils/postutils";
 import { getAllUsers } from "../utils/userutils";
 import { datareducer } from "../reducer/datareducer";
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { AuthContext } from "./AuthContext";
 
 export const DataContext = createContext();
 
@@ -14,11 +15,7 @@ export const DataProvider = ({ children }) => {
     bookmarks: [],
   });
 
-  // console.log(initialState.posts, initialState.users);
-
-  const currentUser = JSON.parse(localStorage.getItem("user"));
-
-  const [user, setUser] = useState(currentUser);
+  const { setUser } = useContext(AuthContext);
 
   const likePost = async (encodedToken, postId) => {
     try {
@@ -115,6 +112,17 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const allBookmark = async (encodedToken) => {
+    try {
+      const res = await axios.get("/api/users/bookmark/", {
+        headers: { authorization: encodedToken },
+      });
+      dispatch({ type: "ALL-BOOKMARKS", payload: res?.data?.bookmarks });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addToBookmark = async (encodedToken, postId) => {
     try {
       const res = await axios.post(
@@ -190,9 +198,28 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
+
       setUser(res.data.user);
+      toast.success(`Following ${res.data.followUser.username}.`, {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 
@@ -206,6 +233,57 @@ export const DataProvider = ({ children }) => {
         }
       );
       setUser(res.data.user);
+      toast.error("Unfollowed.", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
+    }
+  };
+
+  const createPost = async (encodedToken) => {
+    const postData = { _id: "" };
+    try {
+      const res = await axios.post(
+        "/api/posts",
+        { postData },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      dispatch({ type: "ALL_POSTS", payload: res.data.posts });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const editPost = async (postId, encodedToken) => {
+    const postData = { _id: "" };
+    try {
+      const res = await axios.post(
+        `/api/posts/edit/${postId}`,
+        { postData },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      console.log(res);
+      dispatch({ type: "ALL_POSTS", payload: res.data.posts });
     } catch (error) {
       console.error(error);
     }
@@ -224,15 +302,12 @@ export const DataProvider = ({ children }) => {
     allPosts(dispatch);
   }, []);
 
-  // useEffect(() => {
-  //   singleUser(currentUser._id);
-  // }, []);
-
   const values = {
     initialState,
     dispatch,
     handleBookmark,
     inBookmark,
+    allBookmark,
     addToBookmark,
     removeFromBookmark,
     deletePost,
@@ -240,7 +315,8 @@ export const DataProvider = ({ children }) => {
     dislikePost,
     followUser,
     unfollowUser,
-    user,
+    createPost,
+    editPost,
   };
   return (
     <>

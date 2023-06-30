@@ -1,10 +1,8 @@
 import "../feed/feed.css";
 
 import { Users } from "../users/Users";
-import { Explore } from "../explore/Explore";
 import { SideBar } from "../sidebar/SideBar";
 import { AddPost } from "../../component/addpost/addPost";
-import { Sort } from "../../component/sort/sort";
 
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
@@ -12,6 +10,9 @@ import { DataContext } from "../../context/DataContext";
 import "../explore/explore.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../context/AuthContext";
+import { EditPost } from "./EditPost";
+import { useState } from "react";
 
 export const Feed = () => {
   const {
@@ -22,8 +23,12 @@ export const Feed = () => {
     deletePost,
     likePost,
     dislikePost,
-    user,
+    // editPost,
   } = useContext(DataContext);
+  const { user, editModal, setEditModal } = useContext(AuthContext);
+
+  const [trending, setTrending] = useState(false);
+  const [latest, setLatest] = useState(false);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -38,13 +43,31 @@ export const Feed = () => {
     };
   };
 
-  const showFeedPost = posts.filter(
+  const showFeedPost = posts?.filter(
     (item) =>
-      item?.username === user?.username &&
-      users?.username === user?.following?.username
+      item?.username === user?.username ||
+      user?.following?.some(
+        (followingItem) => followingItem?.username === item?.username
+      )
   );
 
-  console.log(user?.following);
+  const trendingPost = trending
+    ? showFeedPost.sort((a, b) => b.likes.likeCount - a.likes.likeCount)
+    : showFeedPost;
+
+  const recentPosts = latest
+    ? trendingPost.sort(
+        (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
+      )
+    : trendingPost;
+
+  const handleTrending = () => {
+    setTrending((pre) => !pre);
+  };
+
+  const handleLatest = () => {
+    setLatest((pre) => !pre);
+  };
 
   return (
     <>
@@ -53,14 +76,25 @@ export const Feed = () => {
 
         <div>
           <AddPost />
-          <Sort />
+          <div className="sort-parent">
+            <p onClick={handleTrending}>
+              {" "}
+              {trending ? "Remove Filter" : "Filter Trending"}{" "}
+            </p>
+            <p>|</p>
+            <p onClick={handleLatest}>
+              {" "}
+              {latest ? "Remove Filter" : "Show Latest"}{" "}
+            </p>
+          </div>
           <div style={{ width: "42rem" }}>
-            {showFeedPost.map((item) => {
+            {recentPosts.map((item) => {
               return (
                 <div className="explore-A" key={item._id}>
                   <div className="explore-B">
                     <div>
                       <img
+                        alt="profileimg"
                         className="explore-img"
                         src={getuser(item.username).pic}
                       />{" "}
@@ -74,7 +108,10 @@ export const Feed = () => {
                         </span>
                         <span> {item.createdAt} </span>
                         <span>
-                          <i className="fa-regular fa-pen-to-square"></i>
+                          <i
+                            onClick={() => setEditModal(true)}
+                            className="fa-regular fa-pen-to-square"
+                          ></i>
                           <FontAwesomeIcon
                             onClick={() => deletePost(encodedToken, item._id)}
                             icon={faTrash}
@@ -82,10 +119,25 @@ export const Feed = () => {
                         </span>
                       </div>
 
+                      {editModal && (
+                        <div
+                          onClick={() => setEditModal(false)}
+                          className="userprofile_modal_outer_div"
+                        >
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="userprofile_modal_outer_container"
+                          >
+                            <EditPost editpost={true} />
+                          </div>
+                        </div>
+                      )}
+
                       <div className="explore-E">
                         <span>{item.content} </span>
 
                         <img
+                          alt="post img"
                           className="explore-post-img"
                           src={item.postImage}
                         />
@@ -141,7 +193,6 @@ export const Feed = () => {
             })}
           </div>
         </div>
-
         <Users />
       </div>
     </>

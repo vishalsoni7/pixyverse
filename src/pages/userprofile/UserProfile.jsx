@@ -12,6 +12,8 @@ import {
   faLink,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../context/AuthContext";
+import { EditUser } from "./EditUser";
 
 export const UserProfile = () => {
   const {
@@ -22,8 +24,8 @@ export const UserProfile = () => {
     inBookmark,
     addToBookmark,
     removeFromBookmark,
-    user,
   } = useContext(DataContext);
+  const { user, editModal, setEditModal } = useContext(AuthContext);
 
   const showMyPosts = posts.filter(
     ({ username }) => username === user?.username
@@ -52,7 +54,12 @@ export const UserProfile = () => {
             <FontAwesomeIcon icon={faArrowLeft} size="lg" className="arrow" />
 
             <div className="userprofile-center-div-B">
-              <p> {user?.name} </p> <span> {showMyPosts?.length} Posts </span>
+              <p>
+                {" "}
+                {user?.name} {user?.firstName}
+                {user?.lastName}
+              </p>{" "}
+              <span> {showMyPosts?.length} Posts </span>
             </div>
           </div>
           <div className="A">
@@ -72,7 +79,12 @@ export const UserProfile = () => {
                 </div>
                 <div>
                   {" "}
-                  <button className="userprofile-btn">Edit Profile</button>
+                  <button
+                    onClick={() => setEditModal(true)}
+                    className="userprofile-btn"
+                  >
+                    Edit Profile
+                  </button>
                 </div>
               </div>
 
@@ -99,89 +111,21 @@ export const UserProfile = () => {
               </div>
             </div>
           </div>
-          {/* {showMyPosts.map((item) => {
-            return (
-              <div key={item._id} className="user-details-post-parent-div">
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
-                  <div className="post-profile">
-                    <img
-                      className="user-profile-img"
-                      src={getuser(item.username).pic}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="user-profile-post-about-user">
-                    <div className="user-profile-post-about-user-A">
-                      <span> {getuser(item.username).name} </span>{" "}
-                      <span> @{item.username} </span>
-                    </div>
-                    <span> {item.createdAt} </span>
-
-                    <div className="user-profile-post-about-user-B">
-                      <span>
-                        <i className="fa-regular fa-pen-to-square"></i>
-                      </span>
-                      <span>
-                        <FontAwesomeIcon
-                          onClick={() => deletePost(encodedToken, item._id)}
-                          icon={faTrash}
-                        />
-                      </span>{" "}
-                    </div>
-                  </div>
-
-                  <div className="user-profile-content">
-                    <span>{item.content} </span>{" "}
-                  </div>
-
-                  <div className="user-profile-post-img-div">
-                    {" "}
-                    <img
-                      className="user-profile-post-img"
-                      src={item.postImage}
-                    />{" "}
-                  </div>
-
-                  <div className="user-profile-post-icon">
-                    <i
-                      onClick={() =>
-                        item.likes.likedBy.length === 0
-                          ? likePost(encodedToken, item._id)
-                          : dislikePost(encodedToken, item._id)
-                      }
-                      title="like"
-                      className={
-                        item.likes.likedBy.length === 0
-                          ? "fa-regular fa-heart"
-                          : "fa-solid fa-heart"
-                      }
-                    >
-                      {" "}
-                      <span>{item.likes.likeCount}</span>
-                    </i>
-                    <i title="comment" className="fa-regular fa-comment"></i>
-                    {!inBookmark(item._id) ? (
-                      <i
-                        title="add to bookmark"
-                        onClick={() => addToBookmark(encodedToken, item._id)}
-                        className="fa-regular fa-bookmark"
-                      ></i>
-                    ) : (
-                      <i
-                        title="remove from bookmark"
-                        onClick={() =>
-                          removeFromBookmark(encodedToken, item._id)
-                        }
-                        className="fa-solid fa-bookmark"
-                      ></i>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })} */}
         </div>
+
+        {editModal && (
+          <div
+            onClick={() => setEditModal(false)}
+            className="userprofile_modal_outer_div"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="userprofile_modal_outer_container"
+            >
+              <EditUser edit={true} />
+            </div>
+          </div>
+        )}
 
         <div>
           {showMyPosts.map((item) => {

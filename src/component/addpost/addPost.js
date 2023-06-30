@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-// import { createPost } from "../../utils/postutils";
-
+import { useContext, useState } from "react";
+import { DataContext } from "../../context/DataContext";
 import "../addpost/addpost.css";
 
 export const AddPost = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const { createPost, newPost, setNewPost, handleInput } =
+    useContext(DataContext);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
-  };
+  const encodedToken = localStorage.getItem("token");
 
   return (
     <>
       <div className="add-post-div">
         <div>
           <input
+            style={{ fontSize: "larger" }}
             className="add-post-input"
             placeholder="what's happning?"
             type="text"
           />{" "}
         </div>
-        <div>
+        <div style={{ display: "flex", alignItems: "end" }}>
+          <button onClick={() => createPost(encodedToken)}>Post</button>{" "}
+        </div>
+      </div>
+    </>
+  );
+};
+
+// const [selectedImage, setSelectedImage] = useState(null);
+
+// const handleImageChange = (event) => {
+//   const file = event.target.files[0];
+//   setSelectedImage(URL.createObjectURL(file));
+// };
+
+{
+  /* <div>
           {selectedImage && (
             <div>
               <img
@@ -45,8 +60,5 @@ export const AddPost = () => {
             </label>
             <button> Post </button>
           </div>
-        </div>
-      </div>
-    </>
-  );
-};
+        </div> */
+}

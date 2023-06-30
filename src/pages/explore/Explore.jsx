@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../../context/DataContext";
 import { SideBar } from "../sidebar/SideBar";
 import { Users } from "../users/Users";
@@ -34,9 +34,9 @@ export const Explore = () => {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "space-evenly",
+        display: "-webkit-inline-flex",
+        gap: "2rem",
+        flexWrap: "wrap",
       }}
     >
       {" "}

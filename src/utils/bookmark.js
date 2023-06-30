@@ -7,13 +7,14 @@ const getAllBookmark = async (dispatch) => {
     const res = await axios.get("/api/users/bookmark/", {
       headers: { authorization: encodedToken },
     });
+    console.log(res);
     dispatch({ type: "ALL-BOOKMARKS", payload: res.data.bookmarks });
   } catch (error) {
     console.error(error);
   }
 };
 
-const addToBookmark = async (encodedToken, postId, dispatch) => {
+const addToBookmark = async (postId, dispatch) => {
   try {
     const res = await axios.post(
       `/api/users/bookmark/${postId}`,
@@ -28,11 +29,12 @@ const addToBookmark = async (encodedToken, postId, dispatch) => {
   }
 };
 
-const removeFromBookmark = async (postId) => {
+const removeFromBookmark = async (postId, encodedToken) => {
   try {
     const res = await axios.delete(`/api/users/remove-bookmark/${postId}`, {
       headers: { authorization: encodedToken },
     });
+    dispatch({ type: "ALL-BOOKMARKS", payload: res.data.bookmarks });
   } catch (error) {
     console.error(error);
   }

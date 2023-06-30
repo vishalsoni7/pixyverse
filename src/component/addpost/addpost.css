@@ -8,18 +8,25 @@
   background: #00243d;
   color: white;
   min-height: 7rem;
+  justify-content: space-between;
+  padding: 0.5rem;
 }
 
 .add-post-input {
   background: none;
   border: none;
-  padding: 0.5rem;
+  padding: 1rem;
   font-size: medium;
   color: white;
 }
 
 input[type="file"] {
   display: none;
+}
+
+input:focus,
+input:hover {
+  outline: none;
 }
 
 .add-post-div-img {

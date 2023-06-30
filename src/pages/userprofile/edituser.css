@@ -1,0 +1,39 @@
+.edit-img {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.edit-inner-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.edit-inner-div input {
+  padding: 0.7rem;
+  width: 10rem;
+  background: none;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  color: whitesmoke;
+}
+
+.edit-user-btn {
+  font-size: 14px;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgb(29, 155, 240);
+  color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+}
+
+.edit-user-btn:hover {
+  transition: 0.3s;
+  color: white;
+  box-shadow: inset 0em 0em 0em 50em rgba(0, 0, 0, 0.3);
+}
