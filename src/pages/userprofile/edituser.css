@@ -16,7 +16,8 @@
 .edit-inner-div input {
   padding: 0.7rem;
   width: 10rem;
-  background: none;
+  font-size: medium;
+  background: #252525;
   border: 1px solid whitesmoke;
   border-radius: 5px;
   color: whitesmoke;

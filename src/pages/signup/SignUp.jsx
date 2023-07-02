@@ -34,7 +34,7 @@ export const SignUp = () => {
       signupDetails.password.trim() === "" ||
       signupDetails.confirmPassword.trim() === ""
     ) {
-      toast.error("Please Details!", {
+      toast.error("Please fill details!", {
         style: {
           padding: ".5rem",
           background: "#252525",

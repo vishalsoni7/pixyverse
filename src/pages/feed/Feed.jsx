@@ -12,23 +12,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../context/AuthContext";
 import { EditPost } from "./EditPost";
-import { useState } from "react";
 
 export const Feed = () => {
   const {
-    initialState: { posts, users },
+    initialState: { users },
     inBookmark,
     addToBookmark,
     removeFromBookmark,
     deletePost,
     likePost,
     dislikePost,
-    // editPost,
+    recentPosts,
+    trending,
+    latest,
+    setLatest,
+    setTrending,
   } = useContext(DataContext);
   const { user, editModal, setEditModal } = useContext(AuthContext);
-
-  const [trending, setTrending] = useState(false);
-  const [latest, setLatest] = useState(false);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -43,24 +43,6 @@ export const Feed = () => {
     };
   };
 
-  const showFeedPost = posts?.filter(
-    (item) =>
-      item?.username === user?.username ||
-      user?.following?.some(
-        (followingItem) => followingItem?.username === item?.username
-      )
-  );
-
-  const trendingPost = trending
-    ? showFeedPost.sort((a, b) => b.likes.likeCount - a.likes.likeCount)
-    : showFeedPost;
-
-  const recentPosts = latest
-    ? trendingPost.sort(
-        (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
-      )
-    : trendingPost;
-
   const handleTrending = () => {
     setTrending((pre) => !pre);
   };
@@ -68,6 +50,10 @@ export const Feed = () => {
   const handleLatest = () => {
     setLatest((pre) => !pre);
   };
+
+  const showPost = recentPosts.map((item) => item.postImage.length > 0);
+
+  console.log(recentPosts.some((item) => item.postImage.length === 0));
 
   return (
     <>
@@ -112,6 +98,7 @@ export const Feed = () => {
                             onClick={() => setEditModal(true)}
                             className="fa-regular fa-pen-to-square"
                           ></i>
+
                           <FontAwesomeIcon
                             onClick={() => deletePost(encodedToken, item._id)}
                             icon={faTrash}
@@ -122,13 +109,13 @@ export const Feed = () => {
                       {editModal && (
                         <div
                           onClick={() => setEditModal(false)}
-                          className="userprofile_modal_outer_div"
+                          className="post-edit_modal_outer_div"
                         >
                           <div
                             onClick={(e) => e.stopPropagation()}
-                            className="userprofile_modal_outer_container"
+                            className="post-edit_modal_outer_container"
                           >
-                            <EditPost editpost={true} />
+                            <EditPost editPosts={true} />
                           </div>
                         </div>
                       )}
@@ -136,11 +123,13 @@ export const Feed = () => {
                       <div className="explore-E">
                         <span>{item.content} </span>
 
-                        <img
-                          alt="post img"
-                          className="explore-post-img"
-                          src={item.postImage}
-                        />
+                        {showPost && (
+                          <img
+                            alt="post img"
+                            className="explore-post-img"
+                            src={item.postImage}
+                          />
+                        )}
 
                         <div className="explore-F">
                           <i

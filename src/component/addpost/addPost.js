@@ -1,64 +1,65 @@
-// import React, { useState } from "react";
-
 import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import "../addpost/addpost.css";
 
 export const AddPost = () => {
-  const { createPost, newPost, setNewPost, handleInput } =
-    useContext(DataContext);
+  const { createPost, newPost, setNewPost } = useContext(DataContext);
 
   const encodedToken = localStorage.getItem("token");
+
+  const handleInput = (e) => {
+    setNewPost((newPost) => ({
+      ...newPost,
+      content: e.target.value,
+    }));
+  };
+
+  const handleImg = (e) => {
+    const files = e.target.files[0];
+    setNewPost((newPost) => ({
+      ...newPost,
+      postImage: URL.createObjectURL(files),
+    }));
+  };
+
+  const isDisabled =
+    newPost.content.trim().length === 0 && newPost.postImage === "";
 
   return (
     <>
       <div className="add-post-div">
         <div>
           <input
-            style={{ fontSize: "larger" }}
             className="add-post-input"
             placeholder="what's happning?"
             type="text"
+            name="content"
+            value={newPost?.content}
+            onChange={handleInput}
           />{" "}
         </div>
-        <div style={{ display: "flex", alignItems: "end" }}>
-          <button onClick={() => createPost(encodedToken)}>Post</button>{" "}
+        <>
+          {newPost?.postImage && (
+            <>
+              <img className="add-post-img" src={newPost?.postImage} />
+            </>
+          )}
+        </>
+        <div className="post-input-div">
+          <input id="file" type="file" onChange={handleImg} accept="image/*" />
+          <label htmlFor="file">
+            <i className="fa-regular fa-image fa-lg"></i>
+          </label>{" "}
+          <button
+            disabled={isDisabled}
+            className="add-post-btn"
+            title={isDisabled ? "Add content" : "Post content"}
+            onClick={() => createPost(newPost, encodedToken)}
+          >
+            Post
+          </button>{" "}
         </div>
       </div>
     </>
   );
 };
-
-// const [selectedImage, setSelectedImage] = useState(null);
-
-// const handleImageChange = (event) => {
-//   const file = event.target.files[0];
-//   setSelectedImage(URL.createObjectURL(file));
-// };
-
-{
-  /* <div>
-          {selectedImage && (
-            <div>
-              <img
-                className="add-post-div-img"
-                src={selectedImage}
-                alt="Selected"
-              />
-            </div>
-          )}
-          <div>
-            <input
-              className="add-post-btn"
-              id="file"
-              type="file"
-              onChange={handleImageChange}
-              accept="image/*"
-            />
-            <label htmlFor="file">
-              <i className="fa-regular fa-image fa-lg"></i>
-            </label>
-            <button> Post </button>
-          </div>
-        </div> */
-}

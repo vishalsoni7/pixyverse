@@ -3,7 +3,13 @@ import toast from "react-hot-toast";
 import { allPosts } from "../utils/postutils";
 import { getAllUsers } from "../utils/userutils";
 import { datareducer } from "../reducer/datareducer";
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { AuthContext } from "./AuthContext";
 
 export const DataContext = createContext();
@@ -15,7 +21,15 @@ export const DataProvider = ({ children }) => {
     bookmarks: [],
   });
 
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+
+  const [trending, setTrending] = useState(false);
+  const [latest, setLatest] = useState(false);
+
+  const [newPost, setNewPost] = useState({
+    content: "",
+    postImage: "",
+  });
 
   const likePost = async (encodedToken, postId) => {
     try {
@@ -27,7 +41,7 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
-      toast.success("Post liked. ♥️", {
+      toast.success("Post liked ♥️", {
         style: {
           fontSize: "medium",
           padding: ".5rem",
@@ -60,7 +74,7 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
-      toast.success("Post disliked. 🙃", {
+      toast.success("Post disliked 🙃", {
         style: {
           fontSize: "medium",
           padding: ".5rem",
@@ -89,7 +103,7 @@ export const DataProvider = ({ children }) => {
         headers: { authorization: encodedToken },
       });
       dispatch({ type: "ALL_POSTS", payload: res?.data?.posts });
-      toast.success("Post deleted.", {
+      toast.success("Post Deleted", {
         style: {
           fontSize: "medium",
           padding: ".5rem",
@@ -198,7 +212,6 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-
       setUser(res.data.user);
       toast.success(`Following ${res.data.followUser.username}.`, {
         style: {
@@ -256,24 +269,41 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  const createPost = async (encodedToken) => {
-    const postData = { _id: "" };
+  const createPost = async (post, encodedToken) => {
     try {
       const res = await axios.post(
         "/api/posts",
-        { postData },
+        { postData: post },
         {
           headers: { authorization: encodedToken },
         }
       );
+      setNewPost({ content: "", postImage: "" });
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
+      toast.success("Posed.", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong!", {
+        style: {
+          fontSize: "medium",
+          padding: ".5rem",
+          background: "#003153",
+          color: "white",
+          border: ".5px solid white",
+        },
+      });
     }
   };
 
-  const editPost = async (postId, encodedToken) => {
-    const postData = { _id: "" };
+  const editPost = async (postData, postId, encodedToken) => {
     try {
       const res = await axios.post(
         `/api/posts/edit/${postId}`,
@@ -282,7 +312,6 @@ export const DataProvider = ({ children }) => {
           headers: { authorization: encodedToken },
         }
       );
-      console.log(res);
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
     } catch (error) {
       console.error(error);
@@ -296,6 +325,26 @@ export const DataProvider = ({ children }) => {
   const inBookmark = (postId) => {
     return handleBookmark.find((item) => item._id === postId);
   };
+
+  const { posts } = initialState;
+
+  const showFeedPost = posts?.filter(
+    (item) =>
+      item?.username === user?.username ||
+      user?.following?.some(
+        (followingItem) => followingItem?.username === item?.username
+      )
+  );
+
+  const trendingPost = trending
+    ? showFeedPost.sort((a, b) => b.likes.likeCount - a.likes.likeCount)
+    : showFeedPost;
+
+  const recentPosts = latest
+    ? trendingPost.sort(
+        (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
+      )
+    : trendingPost;
 
   useEffect(() => {
     getAllUsers(dispatch);
@@ -317,6 +366,11 @@ export const DataProvider = ({ children }) => {
     unfollowUser,
     createPost,
     editPost,
+    recentPosts,
+    setLatest,
+    setTrending,
+    newPost,
+    setNewPost,
   };
   return (
     <>

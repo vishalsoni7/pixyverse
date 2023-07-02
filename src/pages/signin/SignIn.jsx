@@ -23,9 +23,8 @@ export const Signin = () => {
       signinDetails.username.trim() === "" ||
       signinDetails.password.trim() === ""
     ) {
-      toast.error("Please Details!", {
+      toast.error("Please fill details!", {
         style: {
-          fontSize: "large",
           padding: ".5rem",
           background: "#003153",
           color: "white",
