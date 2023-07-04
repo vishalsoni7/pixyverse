@@ -1,8 +1,14 @@
 import axios from "axios";
-import toast from "react-hot-toast";
-
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import {
+  SignInUserName,
+  IncorrectPswrdandUserName,
+  SignOutToast,
+  UpdateUser,
+  HandleApiError,
+} from "../ToastUtils";
 
 export const AuthContext = createContext();
 
@@ -26,28 +32,12 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(encodedToken));
         setUser(foundUser);
         setIsSignIn(true);
+        SignInUserName(foundUser);
         navigate("/home");
-        toast.success(`Welcome ${foundUser.username}.`, {
-          style: {
-            fontSize: "large",
-            padding: ".5rem",
-            background: "#003153",
-            color: "white",
-            border: ".5px solid white",
-          },
-        });
       }
     } catch (error) {
       console.error(error);
-      toast.error("Incorrect username or password", {
-        style: {
-          fontSize: "large",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      IncorrectPswrdandUserName();
     }
   };
 
@@ -63,45 +53,21 @@ export const AuthProvider = ({ children }) => {
         setUser(createdUser);
         setIsSignIn(true);
         navigate("/home");
-        toast.success(`Welcome ${signupDetails.username}.`, {
-          style: {
-            fontSize: "medium",
-            padding: ".5rem",
-            background: "#003153",
-            color: "white",
-            border: ".5px solid white",
-          },
-        });
+        SignInUserName(createdUser);
       }
     } catch (error) {
       console.error(error);
-      toast.error("Incorrect username or password", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      IncorrectPswrdandUserName();
     }
   };
 
   const signOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    localStorage.removeItem("user");
     localStorage.removeItem("guestUser");
-    navigate("/signin");
-    toast.error("Signed Out", {
-      style: {
-        fontSize: "medium",
-        padding: ".5rem",
-        background: "#003153",
-        color: "white",
-        border: ".5px solid white",
-      },
-    });
+    navigate("/");
+    setIsSignIn(false);
+    SignOutToast();
   };
 
   const editUser = async (userData, encodedToken, setEditModal) => {
@@ -116,10 +82,11 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 201) {
         setUser(res.data.user);
         setEditModal(false);
+        UpdateUser(res.data.user);
       }
-      console.log(res);
     } catch (error) {
       console.error(error);
+      HandleApiError();
     }
   };
 

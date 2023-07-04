@@ -1,14 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+
 import "../signin/signin.css";
-import toast from "react-hot-toast";
+import { FillDetails } from "../../ToastUtils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 
-export const Signin = () => {
+export const SignIn = () => {
   const { userSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -23,14 +24,7 @@ export const Signin = () => {
       signinDetails.username.trim() === "" ||
       signinDetails.password.trim() === ""
     ) {
-      toast.error("Please fill details!", {
-        style: {
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      FillDetails();
     } else {
       userSignIn(signinDetails, navigate);
     }
@@ -47,7 +41,10 @@ export const Signin = () => {
   return (
     <div className="signin-parent-div">
       {" "}
-      <h1> Pixyverse </h1>
+      <NavLink className="signin-page-link" to="/">
+        {" "}
+        <h1 style={{ marginTop: "0" }}> Pixyverse </h1>{" "}
+      </NavLink>
       <div className="signin-container">
         <div>
           <h2>

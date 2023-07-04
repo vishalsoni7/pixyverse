@@ -1,12 +1,13 @@
+import "../signup/signup.css";
+
+import { useState, useContext } from "react";
+
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
+import { FillDetails, PasswordNotMached } from "../../ToastUtils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import "../signup/signup.css";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 
 export const SignUp = () => {
   const { userSignUp } = useContext(AuthContext);
@@ -34,21 +35,9 @@ export const SignUp = () => {
       signupDetails.password.trim() === "" ||
       signupDetails.confirmPassword.trim() === ""
     ) {
-      toast.error("Please fill details!", {
-        style: {
-          padding: ".5rem",
-          background: "#252525",
-          color: "whitesmoke",
-        },
-      });
+      FillDetails();
     } else if (signupDetails.password !== signupDetails.confirmPassword) {
-      toast.error("Password does not matched.", {
-        style: {
-          padding: ".5rem",
-          background: "#252525",
-          color: "whitesmoke",
-        },
-      });
+      PasswordNotMached();
     } else {
       userSignUp(signupDetails, navigate);
     }
@@ -56,7 +45,10 @@ export const SignUp = () => {
 
   return (
     <div className="signup-parent-div">
-      <h1> Pixyverse </h1>
+      <NavLink className="signin-page-link" to="/">
+        {" "}
+        <h1 style={{ marginTop: "0" }}> Pixyverse </h1>{" "}
+      </NavLink>
       <div className="signup-container">
         <h2>
           <FontAwesomeIcon icon={faRightToBracket} /> Sign Up
@@ -144,17 +136,3 @@ export const SignUp = () => {
     </div>
   );
 };
-
-{
-  /* <div className="signup-div">
-          <p>Last Name</p>
-          <input
-            onChange={(e) =>
-              setSignUpDetails({ ...signupDetails, lastName: e.target.value })
-            }
-            placeholder="Soni"
-            className="signup-input"
-            type="text"
-          />
-        </div> */
-}

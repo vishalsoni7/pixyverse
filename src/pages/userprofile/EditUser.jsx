@@ -3,7 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import "./edituser.css";
 
-export const EditUser = ({ edit }) => {
+export const EditUser = () => {
   const { user, setUser, setEditModal, editUser } = useContext(AuthContext);
 
   const handleInput = (e) => {

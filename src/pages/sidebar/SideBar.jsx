@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { Switch } from "../../component/switch/switch";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,7 +13,7 @@ import {
 import { DataContext } from "../../context/DataContext";
 
 export const SideBar = () => {
-  const { signOut, isSignIn } = useContext(AuthContext);
+  const { signOut } = useContext(AuthContext);
   const { allBookmark } = useContext(DataContext);
   const loginUser = JSON.parse(localStorage.getItem("user"));
 
@@ -58,10 +57,6 @@ export const SideBar = () => {
             </h3>{" "}
           </div>
         </div>
-
-        {/* <div>
-          <Switch />
-        </div> */}
 
         <NavLink className="feed-link" to="/userprofile">
           {" "}

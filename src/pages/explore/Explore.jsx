@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
-import { SideBar } from "../sidebar/SideBar";
-import { Users } from "../users/Users";
 
 import "../explore/explore.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../context/AuthContext";
+import { EditPost } from "../feed/EditPost";
 
 export const Explore = () => {
   const {
@@ -16,7 +16,9 @@ export const Explore = () => {
     deletePost,
     likePost,
     dislikePost,
+    handleEdit,
   } = useContext(DataContext);
+  const { editModal, setEditModal } = useContext(AuthContext);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -32,15 +34,10 @@ export const Explore = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "-webkit-inline-flex",
-        gap: "2rem",
-        flexWrap: "wrap",
-      }}
-    >
-      {" "}
-      <SideBar />
+    <div>
+      <div className="All-heading-div">
+        <h3>Explore Pixyverse</h3>
+      </div>
       <div className="explore-parent-div">
         <div>
           {posts.map((item) => {
@@ -61,14 +58,37 @@ export const Explore = () => {
                         @{item.username}{" "}
                       </span>
                       <span> {item.createdAt} </span>
+
                       <span>
-                        <i className="fa-regular fa-pen-to-square"></i>
-                        <FontAwesomeIcon
-                          onClick={() => deletePost(encodedToken, item._id)}
-                          icon={faTrash}
-                        />
+                        {handleEdit(item.username) && (
+                          <span>
+                            <i
+                              onClick={() => setEditModal(true)}
+                              className="fa-regular fa-pen-to-square"
+                            ></i>
+
+                            <FontAwesomeIcon
+                              onClick={() => deletePost(encodedToken, item._id)}
+                              icon={faTrash}
+                            />
+                          </span>
+                        )}
                       </span>
                     </div>
+
+                    {editModal && (
+                      <div
+                        onClick={() => setEditModal(false)}
+                        className="post-edit_modal_outer_div"
+                      >
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="post-edit_modal_outer_container"
+                        >
+                          <EditPost editPosts={true} />
+                        </div>
+                      </div>
+                    )}
 
                     <div className="explore-E">
                       <span>{item.content} </span>
@@ -126,7 +146,6 @@ export const Explore = () => {
           })}
         </div>
       </div>
-      <Users />
     </div>
   );
 };

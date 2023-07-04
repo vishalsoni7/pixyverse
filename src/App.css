@@ -2,6 +2,9 @@
   text-align: center;
   font-family: "Noto Sans", sans-serif;
   flex-wrap: wrap;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 body {

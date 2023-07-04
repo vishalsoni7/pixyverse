@@ -1,8 +1,5 @@
 import axios from "axios";
-import toast from "react-hot-toast";
-import { allPosts } from "../utils/postutils";
-import { getAllUsers } from "../utils/userutils";
-import { datareducer } from "../reducer/datareducer";
+
 import {
   createContext,
   useContext,
@@ -10,7 +7,22 @@ import {
   useReducer,
   useState,
 } from "react";
+import { allPosts } from "../utils/postutils";
+import { getAllUsers } from "../utils/userutils";
+import { datareducer } from "../reducer/datareducer";
+
 import { AuthContext } from "./AuthContext";
+
+import {
+  LikePost,
+  DisLikePost,
+  HandleApiError,
+  DeletePost,
+  AddInBookmark,
+  RemoveBookmark,
+  FollowUser,
+  UnFollowUser,
+} from "../ToastUtils";
 
 export const DataContext = createContext();
 
@@ -26,11 +38,6 @@ export const DataProvider = ({ children }) => {
   const [trending, setTrending] = useState(false);
   const [latest, setLatest] = useState(false);
 
-  const [newPost, setNewPost] = useState({
-    content: "",
-    postImage: "",
-  });
-
   const likePost = async (encodedToken, postId) => {
     try {
       const res = await axios.post(
@@ -41,26 +48,10 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
-      toast.success("Post liked ♥️", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      LikePost();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      HandleApiError();
     }
   };
 
@@ -74,26 +65,10 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL_POSTS", payload: res.data.posts });
-      toast.success("Post disliked 🙃", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      DisLikePost();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      HandleApiError();
     }
   };
 
@@ -103,26 +78,10 @@ export const DataProvider = ({ children }) => {
         headers: { authorization: encodedToken },
       });
       dispatch({ type: "ALL_POSTS", payload: res?.data?.posts });
-      toast.success("Post Deleted", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      DeletePost();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      HandleApiError();
     }
   };
 
@@ -147,26 +106,10 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL-BOOKMARKS", payload: res?.data?.bookmarks });
-      toast.success("Bookmarked.", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      AddInBookmark();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      HandleApiError();
     }
   };
 
@@ -180,26 +123,10 @@ export const DataProvider = ({ children }) => {
         }
       );
       dispatch({ type: "ALL-BOOKMARKS", payload: res?.data?.bookmarks });
-      toast.error("Removed from bookmark.", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      RemoveBookmark();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      HandleApiError();
     }
   };
 
@@ -213,26 +140,10 @@ export const DataProvider = ({ children }) => {
         }
       );
       setUser(res.data.user);
-      toast.success(`Following ${res.data.followUser.username}.`, {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      FollowUser();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      HandleApiError();
     }
   };
 
@@ -246,75 +157,10 @@ export const DataProvider = ({ children }) => {
         }
       );
       setUser(res.data.user);
-      toast.error("Unfollowed.", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
+      UnFollowUser();
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
-    }
-  };
-
-  const createPost = async (post, encodedToken) => {
-    try {
-      const res = await axios.post(
-        "/api/posts",
-        { postData: post },
-        {
-          headers: { authorization: encodedToken },
-        }
-      );
-      setNewPost({ content: "", postImage: "" });
-      dispatch({ type: "ALL_POSTS", payload: res.data.posts });
-      toast.success("Posed.", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong!", {
-        style: {
-          fontSize: "medium",
-          padding: ".5rem",
-          background: "#003153",
-          color: "white",
-          border: ".5px solid white",
-        },
-      });
-    }
-  };
-
-  const editPost = async (postData, postId, encodedToken) => {
-    try {
-      const res = await axios.post(
-        `/api/posts/edit/${postId}`,
-        { postData },
-        {
-          headers: { authorization: encodedToken },
-        }
-      );
-      dispatch({ type: "ALL_POSTS", payload: res.data.posts });
-    } catch (error) {
-      console.error(error);
+      HandleApiError();
     }
   };
 
@@ -346,12 +192,15 @@ export const DataProvider = ({ children }) => {
       )
     : trendingPost;
 
+  const handleEdit = (userName) => userName === user.username;
+
   useEffect(() => {
     getAllUsers(dispatch);
     allPosts(dispatch);
   }, []);
 
   const values = {
+    handleEdit,
     initialState,
     dispatch,
     handleBookmark,
@@ -364,13 +213,9 @@ export const DataProvider = ({ children }) => {
     dislikePost,
     followUser,
     unfollowUser,
-    createPost,
-    editPost,
     recentPosts,
     setLatest,
     setTrending,
-    newPost,
-    setNewPost,
   };
   return (
     <>

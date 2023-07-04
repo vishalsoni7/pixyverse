@@ -1,6 +1,3 @@
-import { SideBar } from "../sidebar/SideBar";
-import { Users } from "../users/Users";
-
 import "../userprofile/userprofile.css";
 
 import { useContext } from "react";
@@ -46,7 +43,6 @@ export const UserProfile = () => {
 
   return (
     <div className="userprofile-parent-div">
-      <SideBar />
       <div>
         <div className="userprofile-center-div">
           {" "}
@@ -122,7 +118,7 @@ export const UserProfile = () => {
               onClick={(e) => e.stopPropagation()}
               className="userprofile_modal_outer_container"
             >
-              <EditUser edit={true} />
+              <EditUser />
             </div>
           </div>
         )}
@@ -167,7 +163,7 @@ export const UserProfile = () => {
                   <div className="user-profile-post-img-div">
                     {" "}
                     <img
-                      className="user-profile-post-img"
+                      className="explore-post-img"
                       src={item.postImage}
                     />{" "}
                   </div>
@@ -212,7 +208,6 @@ export const UserProfile = () => {
           })}
         </div>
       </div>
-      <Users />
     </div>
   );
 };

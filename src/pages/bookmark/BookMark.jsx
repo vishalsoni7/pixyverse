@@ -1,16 +1,23 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { DataContext } from "../../context/DataContext";
 
-import { SideBar } from "../sidebar/SideBar";
-import { Users } from "../users/Users";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { EditPost } from "../feed/EditPost";
 
 export const Bookmark = () => {
   const {
     initialState: { users },
     handleBookmark,
     removeFromBookmark,
-    dispatch,
+    likePost,
+    dislikePost,
+    handleEdit,
+    deletePost,
   } = useContext(DataContext);
+
+  const { editModal, setEditModal } = useContext(AuthContext);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -26,20 +33,11 @@ export const Bookmark = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "-webkit-inline-flex",
-        gap: "2rem",
-        flexWrap: "wrap",
-      }}
-    >
-      <SideBar />
+    <div>
       <div style={{ width: "43rem" }}>
-        <div style={{}}> </div>
-        <h3 style={{ textAlign: "left", lineHeight: 0, background: "red" }}>
-          {" "}
-          Bookmark Posts{" "}
-        </h3>{" "}
+        <div className="All-heading-div">
+          <h3>Bookmark Posts</h3>
+        </div>
         {handleBookmark.map((item) => {
           return (
             <div className="explore-A" key={item._id}>
@@ -55,13 +53,65 @@ export const Bookmark = () => {
                     <span> {getuser(item.username).name} </span>
                     <span className="explore-username"> @{item.username} </span>
                     <span> {item.createdAt} </span>
-                    <span>...</span>
+                    {handleEdit(item.username) ? (
+                      <span>
+                        <i
+                          onClick={() => setEditModal(true)}
+                          className="fa-regular fa-pen-to-square"
+                        ></i>
+
+                        <FontAwesomeIcon
+                          onClick={() => deletePost(encodedToken, item._id)}
+                          icon={faTrash}
+                        />
+                      </span>
+                    ) : null}
                   </div>
 
+                  {editModal && (
+                    <div
+                      onClick={() => setEditModal(false)}
+                      className="post-edit_modal_outer_div"
+                    >
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="post-edit_modal_outer_container"
+                      >
+                        <EditPost editPosts={true} />
+                      </div>
+                    </div>
+                  )}
+
+                  <span>{item.content} </span>
+
+                  {item.postImage && (
+                    <img
+                      alt="post img"
+                      className="explore-post-img"
+                      src={item.postImage}
+                    />
+                  )}
+
                   <div className="explore-E">
-                    <span>{item.content} </span>
                     <div className="explore-F">
-                      <i className="fa-regular fa-heart"></i>
+                      <i
+                        onClick={() =>
+                          item.likes.likedBy.length === 0
+                            ? likePost(encodedToken, item._id)
+                            : dislikePost(encodedToken, item._id)
+                        }
+                        title="like"
+                        className={
+                          item.likes.likedBy.length === 0
+                            ? "fa-regular fa-heart"
+                            : "fa-solid fa-heart"
+                        }
+                      >
+                        {" "}
+                        <span style={{ fontSize: "small" }}>
+                          {item.likes.likeCount}
+                        </span>
+                      </i>
                       <i className="fa-regular fa-comment"></i>
                       <i
                         onClick={() =>
@@ -77,7 +127,6 @@ export const Bookmark = () => {
           );
         })}
       </div>
-      <Users />
     </div>
   );
 };

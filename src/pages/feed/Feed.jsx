@@ -1,17 +1,16 @@
 import "../feed/feed.css";
 
-import { Users } from "../users/Users";
-import { SideBar } from "../sidebar/SideBar";
-import { AddPost } from "../../component/addpost/addPost";
-
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+
+import { AddPost } from "../../component/addpost/addPost";
 
 import "../explore/explore.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from "../../context/AuthContext";
+
 import { EditPost } from "./EditPost";
+import { useState } from "react";
 
 export const Feed = () => {
   const {
@@ -27,8 +26,13 @@ export const Feed = () => {
     latest,
     setLatest,
     setTrending,
+    handleEdit,
   } = useContext(DataContext);
-  const { user, editModal, setEditModal } = useContext(AuthContext);
+
+  const [editModal, setEditModal] = useState({
+    modalState: false,
+    postId: "",
+  });
 
   const encodedToken = localStorage.getItem("token");
 
@@ -51,15 +55,13 @@ export const Feed = () => {
     setLatest((pre) => !pre);
   };
 
-  const showPost = recentPosts.map((item) => item.postImage.length > 0);
-
-  console.log(recentPosts.some((item) => item.postImage.length === 0));
-
   return (
     <>
+      {" "}
+      <div className="All-heading-div">
+        <h3>Home</h3>
+      </div>
       <div className="feed-parent-div">
-        <SideBar />
-
         <div>
           <AddPost />
           <div className="sort-parent">
@@ -93,37 +95,30 @@ export const Feed = () => {
                           @{item.username}{" "}
                         </span>
                         <span> {item.createdAt} </span>
-                        <span>
-                          <i
-                            onClick={() => setEditModal(true)}
-                            className="fa-regular fa-pen-to-square"
-                          ></i>
+                        {handleEdit(item.username) ? (
+                          <span>
+                            <i
+                              onClick={() =>
+                                setEditModal({
+                                  modalState: true,
+                                  postId: item._id,
+                                })
+                              }
+                              className="fa-regular fa-pen-to-square"
+                            ></i>
 
-                          <FontAwesomeIcon
-                            onClick={() => deletePost(encodedToken, item._id)}
-                            icon={faTrash}
-                          />
-                        </span>
+                            <FontAwesomeIcon
+                              onClick={() => deletePost(encodedToken, item._id)}
+                              icon={faTrash}
+                            />
+                          </span>
+                        ) : null}
                       </div>
-
-                      {editModal && (
-                        <div
-                          onClick={() => setEditModal(false)}
-                          className="post-edit_modal_outer_div"
-                        >
-                          <div
-                            onClick={(e) => e.stopPropagation()}
-                            className="post-edit_modal_outer_container"
-                          >
-                            <EditPost editPosts={true} />
-                          </div>
-                        </div>
-                      )}
 
                       <div className="explore-E">
                         <span>{item.content} </span>
 
-                        {showPost && (
+                        {item.postImage && (
                           <img
                             alt="post img"
                             className="explore-post-img"
@@ -181,8 +176,20 @@ export const Feed = () => {
               );
             })}
           </div>
+          {editModal.modalState && (
+            <div
+              onClick={() => setEditModal({ modalState: false, postId: "" })}
+              className="post-edit_modal_outer_div"
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="post-edit_modal_outer_container"
+              >
+                <EditPost postId={editModal.postId} />
+              </div>
+            </div>
+          )}
         </div>
-        <Users />
       </div>
     </>
   );

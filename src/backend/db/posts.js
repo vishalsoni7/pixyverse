@@ -9,7 +9,7 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
-    content: "At vero eos et accusamus et iusto odio dignissimos ducimus.",
+    content: "At verot.",
     likes: {
       likeCount: 4,
       likedBy: [],

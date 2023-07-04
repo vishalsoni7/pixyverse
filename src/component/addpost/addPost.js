@@ -2,8 +2,35 @@ import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import "../addpost/addpost.css";
 
+import axios from "axios";
+
+import { HandleApiError, Post } from "../../ToastUtils";
+
 export const AddPost = () => {
-  const { createPost, newPost, setNewPost } = useContext(DataContext);
+  const { dispatch } = useContext(DataContext);
+
+  const [newPost, setNewPost] = useState({
+    content: "",
+    postImage: "",
+  });
+
+  const createPost = async (post, encodedToken) => {
+    try {
+      const res = await axios.post(
+        "/api/posts",
+        { postData: post },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      setNewPost({ content: "", postImage: "" });
+      dispatch({ type: "ALL_POSTS", payload: res.data.posts });
+      Post();
+    } catch (error) {
+      console.error(error);
+      HandleApiError();
+    }
+  };
 
   const encodedToken = localStorage.getItem("token");
 
