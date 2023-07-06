@@ -1,16 +1,13 @@
-import "../feed/feed.css";
-
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 
 import { AddPost } from "../../component/addpost/addPost";
+import { EditPost } from "./EditPost";
 
+import "../feed/feed.css";
 import "../explore/explore.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
-import { EditPost } from "./EditPost";
-import { useState } from "react";
 
 export const Feed = () => {
   const {
@@ -27,12 +24,9 @@ export const Feed = () => {
     setLatest,
     setTrending,
     handleEdit,
+    editModal,
+    setEditModal,
   } = useContext(DataContext);
-
-  const [editModal, setEditModal] = useState({
-    modalState: false,
-    postId: "",
-  });
 
   const encodedToken = localStorage.getItem("token");
 
@@ -75,7 +69,7 @@ export const Feed = () => {
               {latest ? "Remove Filter" : "Show Latest"}{" "}
             </p>
           </div>
-          <div style={{ width: "42rem" }}>
+          <div>
             {recentPosts.map((item) => {
               return (
                 <div className="explore-A" key={item._id}>
@@ -89,13 +83,16 @@ export const Feed = () => {
                     </div>
                     <div className="explore-C">
                       <div className="explore-D">
-                        <span> {getuser(item.username).name} </span>
-                        <span className="explore-username">
-                          {" "}
-                          @{item.username}{" "}
-                        </span>
-                        <span> {item.createdAt} </span>
-                        {handleEdit(item.username) ? (
+                        <div className="explore-H">
+                          <span> {getuser(item.username).name} </span>{" "}
+                          <span className="explore-username">
+                            {" "}
+                            @{item.username}{" "}
+                          </span>
+                          <span> {item.createdAt} </span>
+                        </div>
+
+                        {handleEdit(item.username) && (
                           <span>
                             <i
                               onClick={() =>
@@ -104,7 +101,7 @@ export const Feed = () => {
                                   postId: item._id,
                                 })
                               }
-                              className="fa-regular fa-pen-to-square"
+                              className="explore-G fa-regular fa-pen-to-square"
                             ></i>
 
                             <FontAwesomeIcon
@@ -112,63 +109,64 @@ export const Feed = () => {
                               icon={faTrash}
                             />
                           </span>
-                        ) : null}
+                        )}
                       </div>
 
-                      <div className="explore-E">
+                      <div style={{ textAlign: "left" }}>
+                        {" "}
                         <span>{item.content} </span>
+                      </div>
 
-                        {item.postImage && (
-                          <img
-                            alt="post img"
-                            className="explore-post-img"
-                            src={item.postImage}
-                          />
-                        )}
+                      {item.postImage && (
+                        <img
+                          alt="post img"
+                          className="explore-post-img"
+                          src={item.postImage}
+                        />
+                      )}
 
-                        <div className="explore-F">
-                          <i
-                            onClick={() =>
-                              item.likes.likedBy.length === 0
-                                ? likePost(encodedToken, item._id)
-                                : dislikePost(encodedToken, item._id)
-                            }
-                            title="like"
-                            className={
-                              item.likes.likedBy.length === 0
-                                ? "fa-regular fa-heart"
-                                : "fa-solid fa-heart"
-                            }
-                          >
-                            {" "}
-                            <span style={{ fontSize: "small" }}>
-                              {item.likes.likeCount}
-                            </span>
-                          </i>
+                      <div className="explore-F">
+                        <i
+                          onClick={() =>
+                            item.likes.likedBy.length === 0
+                              ? likePost(encodedToken, item._id)
+                              : dislikePost(encodedToken, item._id)
+                          }
+                          title="like"
+                          className={
+                            item.likes.likedBy.length === 0
+                              ? "fa-regular fa-heart"
+                              : "fa-solid fa-heart"
+                          }
+                        >
+                          {" "}
+                          <span style={{ fontSize: "small" }}>
+                            {item.likes.likeCount}
+                          </span>
+                        </i>
 
-                          <i
-                            title="comment"
-                            className="fa-regular fa-comment"
-                          ></i>
+                        <i
+                          title="comment"
+                          className="fa-regular fa-comment"
+                        ></i>
 
-                          {!inBookmark(item._id) ? (
-                            <i
-                              title="add to bookmark"
-                              onClick={() =>
-                                addToBookmark(encodedToken, item._id)
-                              }
-                              className="fa-regular fa-bookmark"
-                            ></i>
-                          ) : (
-                            <i
-                              title="remove from bookmark"
-                              onClick={() =>
-                                removeFromBookmark(encodedToken, item._id)
-                              }
-                              className="fa-solid fa-bookmark"
-                            ></i>
-                          )}
-                        </div>
+                        <i
+                          title={
+                            !inBookmark(item._id)
+                              ? "add to bookmark"
+                              : "remove from bookmark"
+                          }
+                          onClick={() =>
+                            !inBookmark(item._id)
+                              ? addToBookmark(encodedToken, item._id)
+                              : removeFromBookmark(encodedToken, item._id)
+                          }
+                          className={
+                            !inBookmark(item._id)
+                              ? "fa-regular fa-bookmark"
+                              : "fa-solid fa-bookmark"
+                          }
+                        ></i>
                       </div>
                     </div>
                   </div>

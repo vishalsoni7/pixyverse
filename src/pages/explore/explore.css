@@ -1,11 +1,3 @@
-.explore-parent-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 43rem;
-  flex-wrap: wrap;
-}
-
 .explore-A {
   background: #00243d;
   border: solid gray;
@@ -15,34 +7,40 @@
 .explore-B {
   display: flex;
   align-items: flex-start;
+  gap: 0.5rem;
   margin: 0.5rem;
   max-width: 43rem;
 }
 
 .explore-C {
+  display: flex;
+  align-items: flex-start;
   flex-direction: column;
-  margin-left: 1rem;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .explore-D {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 1rem;
-}
-
-.explore-E {
-  text-align: left;
-  padding-top: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 .explore-F {
   display: flex;
   align-items: flex-start;
   gap: 5rem;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  padding-bottom: 0;
+}
+
+.explore-G {
+  margin-right: 1rem;
+}
+
+.explore-H {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .explore-A:hover {

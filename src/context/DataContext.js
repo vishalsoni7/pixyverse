@@ -38,6 +38,11 @@ export const DataProvider = ({ children }) => {
   const [trending, setTrending] = useState(false);
   const [latest, setLatest] = useState(false);
 
+  const [editModal, setEditModal] = useState({
+    modalState: false,
+    postId: "",
+  });
+
   const likePost = async (encodedToken, postId) => {
     try {
       const res = await axios.post(
@@ -216,6 +221,8 @@ export const DataProvider = ({ children }) => {
     recentPosts,
     setLatest,
     setTrending,
+    editModal,
+    setEditModal,
   };
   return (
     <>

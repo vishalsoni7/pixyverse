@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { DataContext } from "../../context/DataContext";
 
 export const EditPost = ({ postId }) => {
   const {
     initialState: { posts },
     dispatch,
+    setEditModal,
   } = useContext(DataContext);
-  const { setEditModal } = useContext(AuthContext);
 
   const [isEditPost, setIsEditPost] = useState({
     content: "",
@@ -60,6 +59,7 @@ export const EditPost = ({ postId }) => {
       </div>
       <div>
         <img
+          alt="post-img"
           src={post?.postImage}
           style={{ height: "20rem", width: "30rem", borderRadius: "5px" }}
         />

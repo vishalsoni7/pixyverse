@@ -1,14 +1,3 @@
-.userprofile-parent-div {
-  /* display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  grid-area: 1rem; */
-  display: -webkit-inline-box;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
 .userprofile-center-div {
   display: flex;
   flex-direction: column;

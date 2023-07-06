@@ -1,7 +1,9 @@
-import "../userprofile/userprofile.css";
-
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+
+import { AuthContext } from "../../context/AuthContext";
+import { EditUser } from "./EditUser";
+import { EditPost } from "../feed/EditPost";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,8 +11,7 @@ import {
   faLink,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from "../../context/AuthContext";
-import { EditUser } from "./EditUser";
+import "../userprofile/userprofile.css";
 
 export const UserProfile = () => {
   const {
@@ -21,8 +22,11 @@ export const UserProfile = () => {
     inBookmark,
     addToBookmark,
     removeFromBookmark,
+    handleEdit,
+    editModal,
+    setEditModal,
   } = useContext(DataContext);
-  const { user, editModal, setEditModal } = useContext(AuthContext);
+  const { user, editUserModal, setEditUserModal } = useContext(AuthContext);
 
   const showMyPosts = posts.filter(
     ({ username }) => username === user?.username
@@ -42,133 +46,144 @@ export const UserProfile = () => {
   const encodedToken = localStorage.getItem("token");
 
   return (
-    <div className="userprofile-parent-div">
-      <div>
-        <div className="userprofile-center-div">
-          {" "}
-          <div className="userprofile-center-div-A">
-            <FontAwesomeIcon icon={faArrowLeft} size="lg" className="arrow" />
+    <div style={{ width: "min-content" }}>
+      <div className="userprofile-center-div">
+        {" "}
+        <div className="userprofile-center-div-A">
+          <FontAwesomeIcon icon={faArrowLeft} size="lg" className="arrow" />
 
-            <div className="userprofile-center-div-B">
-              <p>
-                {" "}
-                {user?.name} {user?.firstName}
-                {user?.lastName}
-              </p>{" "}
-              <span> {showMyPosts?.length} Posts </span>
-            </div>
+          <div className="userprofile-center-div-B">
+            <p>
+              {" "}
+              {user?.name} {user?.firstName}
+              {user?.lastName}
+            </p>{" "}
+            <span> {showMyPosts?.length} Posts </span>
           </div>
-          <div className="A">
-            <div>
-              <img
-                src={user?.profilePicture}
-                className="user-details-profile-picture"
-                alt="current-user-picture"
-              />
+        </div>
+        <div className="A">
+          <div>
+            <img
+              src={user?.profilePicture}
+              className="user-details-profile-picture"
+              alt="current-user-img"
+            />
+          </div>
+
+          <div className="B">
+            <div className="C">
+              <div className="D">
+                <h2> {user?.name} </h2>
+                <span> @{user?.username} </span>
+              </div>
+              <div>
+                {" "}
+                <button
+                  onClick={() => setEditUserModal(true)}
+                  className="userprofile-btn"
+                >
+                  Edit Profile
+                </button>
+              </div>
             </div>
 
-            <div className="B">
-              <div className="C">
-                <div className="D">
-                  <h2> {user?.name} </h2>
-                  <span> @{user?.username} </span>
-                </div>
-                <div>
-                  {" "}
-                  <button
-                    onClick={() => setEditModal(true)}
-                    className="userprofile-btn"
-                  >
-                    Edit Profile
-                  </button>
-                </div>
+            <div className="F">
+              <p> {user?.bio} </p>
+              <div className="E">
+                <FontAwesomeIcon
+                  icon={faLink}
+                  style={{ paddingLeft: "1rem" }}
+                />{" "}
+                <a
+                  className="user-details-bio"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={user?.link}
+                >
+                  {user?.link}
+                </a>
               </div>
+            </div>
 
-              <div className="F">
-                <p> {user?.bio} </p>
-                <div className="E">
-                  <FontAwesomeIcon
-                    icon={faLink}
-                    style={{ paddingLeft: "1rem" }}
-                  />{" "}
-                  <a
-                    className="user-details-bio"
-                    target="_blank"
-                    href={user?.link}
-                  >
-                    {user?.link}
-                  </a>
-                </div>
-              </div>
-
-              <div className="userprofile-about">
-                <p> {user?.followers?.length} Followers </p>{" "}
-                <p> {user?.following?.length} Following </p>
-              </div>
+            <div className="userprofile-about">
+              <p> {user?.followers?.length} Followers </p>{" "}
+              <p> {user?.following?.length} Following </p>
             </div>
           </div>
         </div>
+      </div>
 
-        {editModal && (
+      {editUserModal && (
+        <div
+          onClick={() => setEditUserModal(false)}
+          className="userprofile_modal_outer_div"
+        >
           <div
-            onClick={() => setEditModal(false)}
-            className="userprofile_modal_outer_div"
+            onClick={(e) => e.stopPropagation()}
+            className="userprofile_modal_outer_container"
           >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="userprofile_modal_outer_container"
-            >
-              <EditUser />
-            </div>
+            <EditUser />
           </div>
-        )}
+        </div>
+      )}
 
-        <div>
-          {showMyPosts.map((item) => {
-            return (
-              <div key={item._id} className="user-details-post-parent-div">
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
-                  <div className="post-profile">
-                    <img
-                      className="user-profile-img"
-                      src={getuser(item.username).pic}
-                    />
-                  </div>
-                </div>
+      <div>
+        {showMyPosts.map((item) => {
+          return (
+            <div className="explore-A" key={item._id}>
+              <div className="explore-B">
                 <div>
-                  <div className="user-profile-post-about-user">
-                    <div className="user-profile-post-about-user-A">
+                  <img
+                    alt="profileimg"
+                    className="explore-img"
+                    src={getuser(item.username).pic}
+                  />{" "}
+                </div>
+                <div className="explore-C">
+                  <div className="explore-D">
+                    <div className="explore-H">
                       <span> {getuser(item.username).name} </span>{" "}
-                      <span> @{item.username} </span>
-                    </div>
-                    <span> {item.createdAt} </span>
-
-                    <div className="user-profile-post-about-user-B">
-                      <span>
-                        <i className="fa-regular fa-pen-to-square"></i>
+                      <span className="explore-username">
+                        {" "}
+                        @{item.username}{" "}
                       </span>
+                      <span> {item.createdAt} </span>
+                    </div>
+
+                    {handleEdit(item.username) && (
                       <span>
+                        <i
+                          onClick={() =>
+                            setEditModal({
+                              modalState: true,
+                              postId: item._id,
+                            })
+                          }
+                          className="explore-G fa-regular fa-pen-to-square"
+                        ></i>
+
                         <FontAwesomeIcon
                           onClick={() => deletePost(encodedToken, item._id)}
                           icon={faTrash}
                         />
-                      </span>{" "}
-                    </div>
+                      </span>
+                    )}
                   </div>
 
-                  <div className="user-profile-content">
-                    <span>{item.content} </span>{" "}
-                  </div>
-
-                  <div className="user-profile-post-img-div">
+                  <div style={{ textAlign: "left" }}>
                     {" "}
+                    <span>{item.content} </span>
+                  </div>
+
+                  {item.postImage && (
                     <img
+                      alt="post img"
                       className="explore-post-img"
                       src={item.postImage}
-                    />{" "}
-                  </div>
+                    />
+                  )}
 
-                  <div className="user-profile-post-icon">
+                  <div className="explore-F">
                     <i
                       onClick={() =>
                         item.likes.likedBy.length === 0
@@ -183,31 +198,50 @@ export const UserProfile = () => {
                       }
                     >
                       {" "}
-                      <span>{item.likes.likeCount}</span>
+                      <span style={{ fontSize: "small" }}>
+                        {item.likes.likeCount}
+                      </span>
                     </i>
+
                     <i title="comment" className="fa-regular fa-comment"></i>
-                    {!inBookmark(item._id) ? (
-                      <i
-                        title="add to bookmark"
-                        onClick={() => addToBookmark(encodedToken, item._id)}
-                        className="fa-regular fa-bookmark"
-                      ></i>
-                    ) : (
-                      <i
-                        title="remove from bookmark"
-                        onClick={() =>
-                          removeFromBookmark(encodedToken, item._id)
-                        }
-                        className="fa-solid fa-bookmark"
-                      ></i>
-                    )}
+
+                    <i
+                      title={
+                        !inBookmark(item._id)
+                          ? "add to bookmark"
+                          : "remove from bookmark"
+                      }
+                      onClick={() =>
+                        !inBookmark(item._id)
+                          ? addToBookmark(encodedToken, item._id)
+                          : removeFromBookmark(encodedToken, item._id)
+                      }
+                      className={
+                        !inBookmark(item._id)
+                          ? "fa-regular fa-bookmark"
+                          : "fa-solid fa-bookmark"
+                      }
+                    ></i>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
+      {editModal.modalState && (
+        <div
+          onClick={() => setEditModal({ modalState: false, postId: "" })}
+          className="post-edit_modal_outer_div"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="post-edit_modal_outer_container"
+          >
+            <EditPost postId={editModal.postId} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

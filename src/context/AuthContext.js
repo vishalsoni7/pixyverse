@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState({});
 
-  const [editModal, setEditModal] = useState(false);
+  const [editUserModal, setEditUserModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
     SignOutToast();
   };
 
-  const editUser = async (userData, encodedToken, setEditModal) => {
+  const editUser = async (userData, encodedToken, setEditUserModal) => {
     try {
       const res = await axios.post(
         "/api/users/edit",
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
       );
       if (res.status === 201) {
         setUser(res.data.user);
-        setEditModal(false);
+        setEditUserModal(false);
         UpdateUser(res.data.user);
       }
     } catch (error) {
@@ -97,8 +97,8 @@ export const AuthProvider = ({ children }) => {
     signOut,
     user,
     setUser,
-    editModal,
-    setEditModal,
+    editUserModal,
+    setEditUserModal,
     editUser,
   };
 

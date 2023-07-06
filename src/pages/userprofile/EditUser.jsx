@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 import "./edituser.css";
 
 export const EditUser = () => {
-  const { user, setUser, setEditModal, editUser } = useContext(AuthContext);
+  const { user, setUser, setEditUserModal, editUser } = useContext(AuthContext);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -17,7 +17,7 @@ export const EditUser = () => {
     <div>
       <div>
         <img
-          alt="profile picture"
+          alt="profile img"
           src={user?.profilePicture}
           className="edit-img"
           id="file"
@@ -64,7 +64,7 @@ export const EditUser = () => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          editUser(user, encodedToken, setEditModal);
+          editUser(user, encodedToken, setEditUserModal);
         }}
         className="edit-user-btn"
       >

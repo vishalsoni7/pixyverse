@@ -2,11 +2,6 @@
   text-decoration: none;
   color: whitesmoke;
 }
-/* .feed-parent-div {
-  display: -webkit-inline-box;
-  gap: 2rem;
-  flex-wrap: wrap;
-} */
 
 .feed-inner-div {
   display: flex;

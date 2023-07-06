@@ -4,7 +4,7 @@ import { DataContext } from "../../context/DataContext";
 import "../explore/explore.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from "../../context/AuthContext";
+
 import { EditPost } from "../feed/EditPost";
 
 export const Explore = () => {
@@ -17,8 +17,9 @@ export const Explore = () => {
     likePost,
     dislikePost,
     handleEdit,
+    editModal,
+    setEditModal,
   } = useContext(DataContext);
-  const { editModal, setEditModal } = useContext(AuthContext);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -46,98 +47,94 @@ export const Explore = () => {
                 <div className="explore-B">
                   <div>
                     <img
+                      alt="profile img"
                       className="explore-img"
                       src={getuser(item.username).pic}
                     />{" "}
                   </div>
                   <div className="explore-C">
                     <div className="explore-D">
-                      <span> {getuser(item.username).name} </span>
-                      <span className="explore-username">
-                        {" "}
-                        @{item.username}{" "}
-                      </span>
-                      <span> {item.createdAt} </span>
+                      <div className="explore-H">
+                        <span> {getuser(item.username).name} </span>{" "}
+                        <span className="explore-username">
+                          {" "}
+                          @{item.username}
+                        </span>
+                        <span> {item.createdAt} </span>
+                      </div>
 
-                      <span>
-                        {handleEdit(item.username) && (
-                          <span>
-                            <i
-                              onClick={() => setEditModal(true)}
-                              className="fa-regular fa-pen-to-square"
-                            ></i>
+                      {handleEdit(item.username) && (
+                        <span>
+                          <i
+                            onClick={() =>
+                              setEditModal({
+                                modalState: true,
+                                postId: item._id,
+                              })
+                            }
+                            className="explore-G fa-regular fa-pen-to-square"
+                          ></i>
 
-                            <FontAwesomeIcon
-                              onClick={() => deletePost(encodedToken, item._id)}
-                              icon={faTrash}
-                            />
-                          </span>
-                        )}
-                      </span>
+                          <FontAwesomeIcon
+                            onClick={() => deletePost(encodedToken, item._id)}
+                            icon={faTrash}
+                          />
+                        </span>
+                      )}
                     </div>
 
-                    {editModal && (
-                      <div
-                        onClick={() => setEditModal(false)}
-                        className="post-edit_modal_outer_div"
-                      >
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="post-edit_modal_outer_container"
-                        >
-                          <EditPost editPosts={true} />
-                        </div>
-                      </div>
+                    <div style={{ textAlign: "left" }}>
+                      {" "}
+                      <span>{item.content} </span>
+                    </div>
+
+                    {item.postImage && (
+                      <img
+                        alt="post img"
+                        className="explore-post-img"
+                        src={item.postImage}
+                      />
                     )}
 
-                    <div className="explore-E">
-                      <span>{item.content} </span>
+                    <div className="explore-F">
+                      <i
+                        onClick={() =>
+                          item.likes.likedBy.length === 0
+                            ? likePost(encodedToken, item._id)
+                            : dislikePost(encodedToken, item._id)
+                        }
+                        title="like"
+                        className={
+                          item.likes.likedBy.length === 0
+                            ? "fa-regular fa-heart"
+                            : "fa-solid fa-heart"
+                        }
+                      >
+                        {" "}
+                        <span style={{ fontSize: "small" }}>
+                          {item.likes.likeCount}
+                        </span>
+                      </i>
 
-                      <img className="explore-post-img" src={item.postImage} />
+                      <i title="comment" className="fa-regular fa-comment"></i>
 
-                      <div className="explore-F">
-                        <i
-                          onClick={() =>
-                            item.likes.likedBy.length === 0
-                              ? likePost(encodedToken, item._id)
-                              : dislikePost(encodedToken, item._id)
-                          }
-                          title="like"
-                          className={
-                            item.likes.likedBy.length === 0
-                              ? "fa-regular fa-heart"
-                              : "fa-solid fa-heart"
-                          }
-                        >
-                          {" "}
-                          <span style={{ fontSize: "small" }}>
-                            {item.likes.likeCount}
-                          </span>
-                        </i>
-
-                        <i
-                          title="comment"
-                          className="fa-regular fa-comment"
-                        ></i>
-
-                        {!inBookmark(item._id) ? (
-                          <i
-                            title="add to bookmark"
-                            onClick={() =>
-                              addToBookmark(encodedToken, item._id)
-                            }
-                            className="fa-regular fa-bookmark"
-                          ></i>
-                        ) : (
-                          <i
-                            title="remove from bookmark"
-                            onClick={() =>
-                              removeFromBookmark(encodedToken, item._id)
-                            }
-                            className="fa-solid fa-bookmark"
-                          ></i>
-                        )}
-                      </div>
+                      <i
+                        title={
+                          !inBookmark(item._id)
+                            ? "add to bookmark"
+                            : "remove from bookmark"
+                        }
+                        onClick={() =>
+                          !inBookmark(item._id)
+                            ? addToBookmark(encodedToken, item._id)
+                            : removeFromBookmark(encodedToken, item._id)
+                        }
+                        className={
+                          !inBookmark(item._id)
+                            ? "fa-regular fa-bookmark"
+                            : "fa-solid fa-bookmark"
+                        }
+                      ></i>
                     </div>
                   </div>
                 </div>
@@ -145,6 +142,19 @@ export const Explore = () => {
             );
           })}
         </div>
+        {editModal.modalState && (
+          <div
+            onClick={() => setEditModal({ modalState: false, postId: "" })}
+            className="post-edit_modal_outer_div"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="post-edit_modal_outer_container"
+            >
+              <EditPost postId={editModal.postId} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

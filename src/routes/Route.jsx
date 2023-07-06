@@ -17,14 +17,6 @@ export const AppRouts = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route
-          path="/home"
-          element={
-            <RequireAuth>
-              <Feed />
-            </RequireAuth>
-          }
-        />
-        <Route
           path="/explore"
           element={
             <RequireAuth>
@@ -33,6 +25,15 @@ export const AppRouts = () => {
             </RequireAuth>
           }
         />
+        <Route
+          path="/home"
+          element={
+            <RequireAuth>
+              <Feed />
+            </RequireAuth>
+          }
+        />
+
         <Route
           path="/bookmark"
           element={
