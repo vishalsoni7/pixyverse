@@ -17,7 +17,8 @@ export const users = [
     following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    profilePicture: "../profilePicture/adarshbalika.jpg",
+    profilePicture:
+      "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799397/__3_yagkno.jpg",
     bio: "Adarsh Balika, a highly skilled spy and assassin.",
     link: "https://github.com/vishalsoni7?tab=repositories",
   },
@@ -32,7 +33,8 @@ export const users = [
     following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    profilePicture: "../profilePicture/vision.jpg",
+    profilePicture:
+      "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688800322/__1_q78dyu.jpg",
     bio: "An artificial being created from the powerful Mind Stone, Vision possesses both incredible strength and the ability to phase through matter, all while striving to understand the complexities of humanity",
     link: "https://github.com/vishalsoni7?tab=repositories",
   },
@@ -47,7 +49,8 @@ export const users = [
     following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    profilePicture: "../profilePicture/ironman.jpg",
+    profilePicture:
+      "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799400/Iron_man_Character_Icon_by_thelivingethan_on_DeviantArt_nvdjm6.jpg",
     bio: "Genius billionaire Tony Stark uses his advanced armor and intellect to fight for justice as Iron Man.",
     link: "https://github.com/vishalsoni7?tab=repositories",
   },
@@ -63,7 +66,8 @@ export const users = [
     following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    profilePicture: "../profilePicture/captain.webp",
+    profilePicture:
+      "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799401/Steve_Rogers_Icon_by_thelivingethan_on_DeviantArt_1_xowmfg.jpg",
     bio: "Super soldier Steve Rogers, known as Captain America, leads the Avengers with unwavering courage, strength, and a shield of justice",
     link: "https://github.com/vishalsoni7?tab=repositories",
   },
@@ -78,7 +82,8 @@ export const users = [
     following: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    profilePicture: "../profilePicture/blackpanther.jpg",
+    profilePicture:
+      "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799399/Black_Widow_Icon_by_thelivingethan_on_DeviantArt_q1yjpq.png",
     bio: "T'Challa, the king of Wakanda, embraces his role as the Black Panther, combining his enhanced abilities and advanced technology to protect his nation and fight for equality",
     link: "https://github.com/vishalsoni7?tab=repositories",
   },
