@@ -22,6 +22,7 @@ import {
   RemoveBookmark,
   FollowUser,
   UnFollowUser,
+  UpdateUser,
 } from "../ToastUtils";
 
 export const DataContext = createContext();
@@ -169,6 +170,33 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  // const UpadateUserInUsers = (UpdatedUser) => {
+  //   const currentUser = UpdatedUser;
+  //   dispatch({ type: "UPDATE-USER-IN-USERS", payload: UpdatedUser });
+  // };
+
+  const editUser = async (userData, encodedToken, setEditUserModal) => {
+    try {
+      const res = await axios.post(
+        "/api/users/edit",
+        { userData },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      if (res.status === 201) {
+        setUser(res.data.user);
+        dispatch({ type: "UPDATE-USER-IN-USERS", payload: res.data.user });
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setEditUserModal(false);
+        UpdateUser(res.data.user);
+      }
+    } catch (error) {
+      console.error(error);
+      HandleApiError();
+    }
+  };
+
   const handleBookmark = initialState.posts.filter((item) =>
     initialState.bookmarks.includes(item._id)
   );
@@ -223,6 +251,7 @@ export const DataProvider = ({ children }) => {
     setTrending,
     editModal,
     setEditModal,
+    editUser,
   };
   return (
     <>

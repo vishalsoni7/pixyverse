@@ -6,8 +6,6 @@ import {
   SignInUserName,
   IncorrectPswrdandUserName,
   SignOutToast,
-  UpdateUser,
-  HandleApiError,
 } from "../ToastUtils";
 
 export const AuthContext = createContext();
@@ -18,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   const [editUserModal, setEditUserModal] = useState(false);
+  const [avatar, setAvatar] = useState(false);
 
   const navigate = useNavigate();
 
@@ -70,36 +69,46 @@ export const AuthProvider = ({ children }) => {
     SignOutToast();
   };
 
-  const editUser = async (userData, encodedToken, setEditUserModal) => {
-    try {
-      const res = await axios.post(
-        "/api/users/edit",
-        { userData },
-        {
-          headers: { authorization: encodedToken },
-        }
-      );
-      if (res.status === 201) {
-        setUser(res.data.user);
-        setEditUserModal(false);
-        UpdateUser(res.data.user);
-      }
-    } catch (error) {
-      console.error(error);
-      HandleApiError();
-    }
-  };
+  // const UpadateUserInUsers = (UpdatedUser) => {
+  //   const currentUser = UpdatedUser;
+  //   dispatch({ type: "UPDATE-USER-IN-USERS", payload: UpdatedUser });
+  // };
+
+  // const editUser = async (userData, encodedToken, setEditUserModal) => {
+  //   try {
+  //     const res = await axios.post(
+  //       "/api/users/edit",
+  //       { userData },
+  //       {
+  //         headers: { authorization: encodedToken },
+  //       }
+  //     );
+  //     if (res.status === 201) {
+  //       setUser(res.data.user);
+  //       console.log(res.data.user);
+  //       UpadateUserInUsers(res.data.user);
+  //       localStorage.setItem("user", JSON.stringify(res.data.user));
+  //       setEditUserModal(false);
+  //       UpdateUser(res.data.user);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     HandleApiError();
+  //   }
+  // };
 
   const values = {
+    user,
+    signOut,
+    setUser,
+    // editUser,
     isSignIn,
+    avatar,
+    setAvatar,
     userSignIn,
     userSignUp,
-    signOut,
-    user,
-    setUser,
     editUserModal,
     setEditUserModal,
-    editUser,
   };
 
   return (

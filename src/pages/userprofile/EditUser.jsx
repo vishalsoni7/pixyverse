@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { DataContext } from "../../context/DataContext";
+import { Avatar } from "./avatar/Avatar";
 
 import "./edituser.css";
 
 export const EditUser = () => {
-  const { user, setUser, setEditUserModal, editUser } = useContext(AuthContext);
+  const { editUser } = useContext(DataContext);
+  const { user, setUser, setEditUserModal, avatar, setAvatar } =
+    useContext(AuthContext);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -23,7 +27,26 @@ export const EditUser = () => {
           id="file"
         />
       </div>
-      <h3 htmlFor="file">Set Avtar</h3>
+      <h3
+        className="avatar-heading"
+        htmlFor="file"
+        onClick={() => setAvatar(true)}
+      >
+        Change Avatar
+      </h3>
+      {avatar && (
+        <div
+          onClick={() => setAvatar(false)}
+          className="avatar_modal_outer_div"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="avatar_modal_outer_container"
+          >
+            <Avatar />
+          </div>
+        </div>
+      )}
 
       <div>
         {" "}

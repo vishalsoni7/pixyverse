@@ -13,7 +13,7 @@ import {
 import { DataContext } from "../../context/DataContext";
 
 export const SideBar = () => {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, user } = useContext(AuthContext);
   const { allBookmark } = useContext(DataContext);
   const loginUser = JSON.parse(localStorage.getItem("user"));
 
