@@ -70,7 +70,11 @@ export const AddPost = () => {
         <>
           {newPost?.postImage && (
             <>
-              <img className="add-post-img" src={newPost?.postImage} />
+              <img
+                className="add-post-img"
+                src={newPost?.postImage}
+                alt="new post"
+              />
             </>
           )}
         </>
