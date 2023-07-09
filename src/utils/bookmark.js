@@ -7,7 +7,6 @@ const getAllBookmark = async (dispatch) => {
     const res = await axios.get("/api/users/bookmark/", {
       headers: { authorization: encodedToken },
     });
-    console.log(res);
     dispatch({ type: "ALL-BOOKMARKS", payload: res.data.bookmarks });
   } catch (error) {
     console.error(error);

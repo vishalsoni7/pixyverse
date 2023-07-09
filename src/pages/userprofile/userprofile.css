@@ -117,7 +117,7 @@
 }
 
 .E a {
-  color: #ffa9da;
+  color: #ffcef4;
   font-size: medium;
 }
 
@@ -230,7 +230,7 @@
   max-width: 35rem;
   width: 100%;
   max-height: 80vh;
-  background-color: whitesmoke;
+  background-color: #00243d;
 }
 
 .avatar-heading {

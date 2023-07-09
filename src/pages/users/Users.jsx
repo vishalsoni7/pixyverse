@@ -60,6 +60,7 @@ export const Users = () => {
                     <img
                       src={person?.profilePicture}
                       className="profilePicture"
+                      alt="profile pic"
                     />
                   </div>{" "}
                   <div className="user-div-D">
@@ -81,7 +82,11 @@ export const Users = () => {
           <div key={person._id} className="user-div-B">
             <div className="user-div-C">
               <div>
-                <img src={person?.profilePicture} className="profilePicture" />
+                <img
+                  src={person?.profilePicture}
+                  className="profilePicture"
+                  alt="profile pic"
+                />
               </div>{" "}
               <div className="user-div-D">
                 <span> {person?.name} </span>

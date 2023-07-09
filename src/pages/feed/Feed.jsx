@@ -71,7 +71,7 @@ export const Feed = () => {
               {latest ? "Remove Filter" : "Show Latest"}{" "}
             </p>
           </div>
-          <div>
+          <div style={{ width: "43rem" }}>
             {recentPosts.map((item) => {
               return (
                 <div className="explore-A" key={item?._id}>
@@ -86,12 +86,18 @@ export const Feed = () => {
                     <div className="explore-C">
                       <div className="explore-D">
                         <div className="explore-H">
-                          <span> {getuser(item?.username)?.name} </span>{" "}
+                          <span style={{ fontSize: "large" }}>
+                            {" "}
+                            {getuser(item?.username)?.name}{" "}
+                          </span>{" "}
                           <span className="explore-username">
                             {" "}
                             @{getuser(item?.username)?.username}{" "}
                           </span>
-                          <span> {item?.createdAt} </span>
+                          <span className="all-post-font-size">
+                            {" "}
+                            {item?.createdAt}{" "}
+                          </span>
                         </div>
 
                         {handleEdit(item?.username) && (
@@ -118,7 +124,7 @@ export const Feed = () => {
                         )}
                       </div>
 
-                      <div style={{ textAlign: "left" }}>
+                      <div style={{ textAlign: "left", fontSize: "15px" }}>
                         {" "}
                         <span>{item?.content} </span>
                       </div>

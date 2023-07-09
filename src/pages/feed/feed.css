@@ -8,6 +8,9 @@
   align-items: baseline;
   justify-content: flex-start;
   flex-direction: column;
+  position: sticky;
+  height: fit-content;
+  top: 0;
 }
 
 .signout {

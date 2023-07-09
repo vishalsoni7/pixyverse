@@ -1,5 +1,8 @@
 .user-main-div {
   margin-top: 0.5rem;
+  position: sticky;
+  height: fit-content;
+  top: 0;
 }
 
 .user-div-A {

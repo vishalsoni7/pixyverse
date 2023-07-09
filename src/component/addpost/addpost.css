@@ -12,6 +12,21 @@
   padding: 0.5rem;
 }
 
+.add-post-div textarea {
+  width: -webkit-fill-available;
+  resize: none;
+  font-size: 15px;
+}
+
+.add-post-div textarea::placeholder {
+  font-size: larger;
+}
+
+.add-post-div textarea:focus,
+.add-post-div textarea:hover {
+  outline: none;
+}
+
 .add-post-input {
   background: none;
   border: none;

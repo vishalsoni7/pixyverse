@@ -59,7 +59,11 @@ export const SideBar = () => {
         <NavLink className="feed-link" to="/userprofile">
           {" "}
           <div className="feed-user-div">
-            <img src={user?.profilePicture} className="profilePicture" />
+            <img
+              src={user?.profilePicture}
+              className="profilePicture"
+              alt="profile pic"
+            />
             <div className="feed-user-about">
               <span> {user?.name} </span>
               <span className="feed-username">@{user?.username} </span>{" "}

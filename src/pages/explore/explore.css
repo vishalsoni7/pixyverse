@@ -65,6 +65,7 @@
 
 .explore-username {
   color: rgba(128, 128, 128, 0.916);
+  font-size: 15px;
 }
 
 .All-heading-div {
@@ -80,4 +81,8 @@
 .All-heading-div h3 {
   margin-left: 1rem;
   line-height: 0.3;
+}
+
+.all-post-font-size {
+  font-size: 15px;
 }
