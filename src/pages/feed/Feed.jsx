@@ -8,6 +8,7 @@ import "../feed/feed.css";
 import "../explore/explore.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Feed = () => {
   const {
@@ -27,6 +28,7 @@ export const Feed = () => {
     editModal,
     setEditModal,
   } = useContext(DataContext);
+  const { user } = useContext(AuthContext);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -34,11 +36,11 @@ export const Feed = () => {
     const filterUser = users.find(
       (user) => user.username.toLowerCase() === clickedUserName.toLowerCase()
     );
-    return {
-      pic: filterUser.profilePicture,
-      name: filterUser.name,
-      username: filterUser.username,
-    };
+    if (filterUser) {
+      return filterUser;
+    } else {
+      return user;
+    }
   };
 
   const handleTrending = () => {
@@ -72,40 +74,44 @@ export const Feed = () => {
           <div>
             {recentPosts.map((item) => {
               return (
-                <div className="explore-A" key={item._id}>
+                <div className="explore-A" key={item?._id}>
                   <div className="explore-B">
                     <div>
                       <img
                         alt="profileimg"
                         className="explore-img"
-                        src={getuser(item.username).pic}
+                        src={getuser(item?.username)?.profilePicture}
                       />{" "}
                     </div>
                     <div className="explore-C">
                       <div className="explore-D">
                         <div className="explore-H">
-                          <span> {getuser(item.username).name} </span>{" "}
+                          <span> {getuser(item?.username)?.name} </span>{" "}
                           <span className="explore-username">
                             {" "}
-                            @{item.username}{" "}
+                            @{getuser(item?.username)?.username}{" "}
                           </span>
-                          <span> {item.createdAt} </span>
+                          <span> {item?.createdAt} </span>
                         </div>
 
-                        {handleEdit(item.username) && (
+                        {handleEdit(item?.username) && (
                           <span>
                             <i
+                              style={{ cursor: "pointer" }}
                               onClick={() =>
                                 setEditModal({
                                   modalState: true,
-                                  postId: item._id,
+                                  postId: item?._id,
                                 })
                               }
                               className="explore-G fa-regular fa-pen-to-square"
                             ></i>
 
                             <FontAwesomeIcon
-                              onClick={() => deletePost(encodedToken, item._id)}
+                              style={{ cursor: "pointer" }}
+                              onClick={() =>
+                                deletePost(encodedToken, item?._id)
+                              }
                               icon={faTrash}
                             />
                           </span>
@@ -114,34 +120,34 @@ export const Feed = () => {
 
                       <div style={{ textAlign: "left" }}>
                         {" "}
-                        <span>{item.content} </span>
+                        <span>{item?.content} </span>
                       </div>
 
-                      {item.postImage && (
+                      {item?.postImage && (
                         <img
                           alt="post img"
                           className="explore-post-img"
-                          src={item.postImage}
+                          src={item?.postImage}
                         />
                       )}
 
                       <div className="explore-F">
                         <i
                           onClick={() =>
-                            item.likes.likedBy.length === 0
-                              ? likePost(encodedToken, item._id)
-                              : dislikePost(encodedToken, item._id)
+                            item?.likes?.likedBy?.length === 0
+                              ? likePost(encodedToken, item?._id)
+                              : dislikePost(encodedToken, item?._id)
                           }
                           title="like"
                           className={
-                            item.likes.likedBy.length === 0
+                            item?.likes?.likedBy?.length === 0
                               ? "fa-regular fa-heart"
                               : "fa-solid fa-heart"
                           }
                         >
                           {" "}
                           <span style={{ fontSize: "small" }}>
-                            {item.likes.likeCount}
+                            {item?.likes?.likeCount}
                           </span>
                         </i>
 
@@ -152,17 +158,17 @@ export const Feed = () => {
 
                         <i
                           title={
-                            !inBookmark(item._id)
+                            !inBookmark(item?._id)
                               ? "add to bookmark"
                               : "remove from bookmark"
                           }
                           onClick={() =>
-                            !inBookmark(item._id)
-                              ? addToBookmark(encodedToken, item._id)
-                              : removeFromBookmark(encodedToken, item._id)
+                            !inBookmark(item?._id)
+                              ? addToBookmark(encodedToken, item?._id)
+                              : removeFromBookmark(encodedToken, item?._id)
                           }
                           className={
-                            !inBookmark(item._id)
+                            !inBookmark(item?._id)
                               ? "fa-regular fa-bookmark"
                               : "fa-solid fa-bookmark"
                           }

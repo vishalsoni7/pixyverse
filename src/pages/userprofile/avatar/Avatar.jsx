@@ -5,6 +5,7 @@ import { AvatarOptions } from "../../../AvatarOptions";
 
 import "../avatar/avatar.css";
 import { useState } from "react";
+import { AvatarAlert, AvatarUpdate } from "../../../ToastUtils";
 
 export const Avatar = () => {
   const { setUser, setAvatar } = useContext(AuthContext);
@@ -28,12 +29,18 @@ export const Avatar = () => {
       </div>
       <button
         className="avatars-btn"
-        onClick={(e) => {
-          setUser((user) => ({
-            ...user,
-            profilePicture: isAvatar,
-          }));
-          setAvatar(false);
+        onClick={() => {
+          if (isAvatar.length === 0) {
+            AvatarAlert();
+            setAvatar(false);
+          } else {
+            setUser((user) => ({
+              ...user,
+              profilePicture: isAvatar,
+            }));
+            AvatarUpdate();
+            setAvatar(false);
+          }
         }}
       >
         {" "}

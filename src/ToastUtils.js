@@ -134,3 +134,21 @@ export const Post = () =>
       color: "whitesmoke",
     },
   });
+
+export const AvatarUpdate = () =>
+  toast.success("Avatar Updated", {
+    style: {
+      padding: ".5rem",
+      background: "#252525",
+      color: "whitesmoke",
+    },
+  });
+
+export const AvatarAlert = () =>
+  toast.error("No avatar selected!", {
+    style: {
+      padding: ".5rem",
+      background: "#252525",
+      color: "whitesmoke",
+    },
+  });

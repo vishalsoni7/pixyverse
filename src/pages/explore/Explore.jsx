@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { EditPost } from "../feed/EditPost";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Explore = () => {
   const {
@@ -20,6 +21,7 @@ export const Explore = () => {
     editModal,
     setEditModal,
   } = useContext(DataContext);
+  const { user } = useContext(AuthContext);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -27,11 +29,11 @@ export const Explore = () => {
     const filterUser = users.find(
       (user) => user.username.toLowerCase() === clickedUserName.toLowerCase()
     );
-    return {
-      pic: filterUser.profilePicture,
-      name: filterUser.name,
-      username: filterUser.username,
-    };
+    if (filterUser) {
+      return filterUser;
+    } else {
+      return user;
+    }
   };
 
   return (
@@ -49,7 +51,7 @@ export const Explore = () => {
                     <img
                       alt="profile img"
                       className="explore-img"
-                      src={getuser(item.username).pic}
+                      src={getuser(item.username)?.profilePicture}
                     />{" "}
                   </div>
                   <div className="explore-C">

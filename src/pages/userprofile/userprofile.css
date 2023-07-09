@@ -41,10 +41,11 @@
 }
 
 .user-details-profile-picture {
-  height: 7rem;
-  width: 7rem;
+  height: 10rem;
+  width: 10rem;
   border-radius: 50%;
   border: 1px solid;
+  margin: 0.5rem;
 }
 
 .user-details-bio {
@@ -116,7 +117,7 @@
 }
 
 .E a {
-  color: crimson;
+  color: #ffa9da;
   font-size: medium;
 }
 
@@ -229,10 +230,7 @@
   max-width: 35rem;
   width: 100%;
   max-height: 80vh;
-  background-color: #00243d;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: whitesmoke;
 }
 
 .avatar-heading {

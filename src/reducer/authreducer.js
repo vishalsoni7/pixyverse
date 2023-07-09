@@ -6,6 +6,7 @@ export const authReducer = (authState, action) => {
       return { ...authState, signInDetails: action.payload };
     case "USER_SIGNUP":
       return { ...authState, signUpDetails: action.payload };
+
     default: {
       return authState;
     }

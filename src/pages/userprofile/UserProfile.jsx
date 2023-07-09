@@ -33,14 +33,14 @@ export const UserProfile = () => {
   );
 
   const getuser = (clickedUserName) => {
-    const filterUser = users?.find(
-      (user) => user?.username.toLowerCase() === clickedUserName.toLowerCase()
+    const filterUser = users.find(
+      (user) => user.username.toLowerCase() === clickedUserName.toLowerCase()
     );
-    return {
-      pic: filterUser?.profilePicture,
-      name: filterUser?.name,
-      username: filterUser?.username,
-    };
+    if (filterUser) {
+      return filterUser;
+    } else {
+      return user;
+    }
   };
 
   const encodedToken = localStorage.getItem("token");
@@ -62,7 +62,7 @@ export const UserProfile = () => {
           </div>
         </div>
         <div className="A">
-          <div>
+          <div style={{ display: "flex" }}>
             <img
               src={user?.profilePicture}
               className="user-details-profile-picture"
@@ -136,7 +136,7 @@ export const UserProfile = () => {
                   <img
                     alt="profileimg"
                     className="explore-img"
-                    src={getuser(item.username).pic}
+                    src={getuser(item.username)?.profilePicture}
                   />{" "}
                 </div>
                 <div className="explore-C">

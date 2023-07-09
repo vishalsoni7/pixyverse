@@ -170,11 +170,6 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  // const UpadateUserInUsers = (UpdatedUser) => {
-  //   const currentUser = UpdatedUser;
-  //   dispatch({ type: "UPDATE-USER-IN-USERS", payload: UpdatedUser });
-  // };
-
   const editUser = async (userData, encodedToken, setEditUserModal) => {
     try {
       const res = await axios.post(

@@ -8,6 +8,8 @@ import {
   SignOutToast,
 } from "../ToastUtils";
 
+import { AvatarOptions } from "../AvatarOptions";
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -42,10 +44,20 @@ export const AuthProvider = ({ children }) => {
 
   const userSignUp = async (signupDetails, navigate) => {
     try {
+      const { name, username, email, password, confirmPassword } =
+        signupDetails;
       const {
         status,
         data: { createdUser, encodedToken },
-      } = await axios.post("/api/auth/signup", signupDetails);
+      } = await axios.post("/api/auth/signup", {
+        name,
+        username,
+        email,
+        password,
+        confirmPassword,
+        profilePicture:
+          AvatarOptions[Math.floor(Math.random() * AvatarOptions?.length)],
+      });
       if (status === 201) {
         localStorage.setItem("user", JSON.stringify(createdUser));
         localStorage.setItem("token", JSON.stringify(encodedToken));
@@ -65,6 +77,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("guestUser");
     navigate("/");
+    setUser({});
     setIsSignIn(false);
     SignOutToast();
   };

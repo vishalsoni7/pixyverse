@@ -17,7 +17,6 @@ export const AvatarOptions = [
   "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799398/Hulk_Icon_by_thelivingethan_on_DeviantArt_2_ucthvo.jpg",
   "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799398/Groot_Icon_by_thelivingethan_on_DeviantArt_z6zzg5.jpg",
   "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799398/Hawkeye_vthjdy.jpg",
-  "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799398/Hawkeye_vthjdy.jpg",
   "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799398/__5_cc2mke.jpg",
   "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799397/__y6yefe.jpg",
   "https://res.cloudinary.com/dhmcuxpy5/image/upload/v1688799397/__3_yagkno.jpg",

@@ -15,8 +15,6 @@ import { DataContext } from "../../context/DataContext";
 export const SideBar = () => {
   const { signOut, user } = useContext(AuthContext);
   const { allBookmark } = useContext(DataContext);
-  const loginUser = JSON.parse(localStorage.getItem("user"));
-
   const encodedToken = localStorage.getItem("token");
 
   return (
@@ -61,12 +59,10 @@ export const SideBar = () => {
         <NavLink className="feed-link" to="/userprofile">
           {" "}
           <div className="feed-user-div">
-            <img src={loginUser?.profilePicture} className="profilePicture" />
+            <img src={user?.profilePicture} className="profilePicture" />
             <div className="feed-user-about">
-              <span> {loginUser?.name} </span>
-              <span className="feed-username">
-                @{loginUser?.username}{" "}
-              </span>{" "}
+              <span> {user?.name} </span>
+              <span className="feed-username">@{user?.username} </span>{" "}
             </div>
           </div>
         </NavLink>
