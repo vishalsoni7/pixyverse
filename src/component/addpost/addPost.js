@@ -56,14 +56,16 @@ export const AddPost = () => {
     <>
       <div className="add-post-div">
         <div>
-          <input
+          <textarea
             className="add-post-input"
             placeholder="what's happning?"
             type="text"
             name="content"
             value={newPost?.content}
             onChange={handleInput}
-          />{" "}
+          >
+            {" "}
+          </textarea>
         </div>
         <>
           {newPost?.postImage && (
