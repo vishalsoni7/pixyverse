@@ -1,8 +1,21 @@
 import "../landing/landing.css";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Landing = () => {
+  const { userSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleGuest = () => {
+    const credential = {
+      username: "adarshbalika",
+      password: "adarshBalika123",
+    };
+    userSignIn(credential, navigate);
+  };
+
   return (
     <div className="landing-parent-div">
       <img src="landing img.svg" alt="landing" />
@@ -28,6 +41,14 @@ export const Landing = () => {
           <NavLink className="landing-signin-link" to="/signin">
             <p>Already have an account? </p>
           </NavLink>
+
+          <p
+            style={{ lineHeight: 0, marginTop: 0 }}
+            className="guest"
+            onClick={handleGuest}
+          >
+            Sign In as Guest
+          </p>
         </div>
       </div>
     </div>
