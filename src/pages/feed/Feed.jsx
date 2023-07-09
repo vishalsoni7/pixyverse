@@ -96,7 +96,7 @@ export const Feed = () => {
                           </span>
                           <span className="all-post-font-size">
                             {" "}
-                            {item?.createdAt}{" "}
+                            {new Date(item?.createdAt).toDateString()}{" "}
                           </span>
                         </div>
 
@@ -124,7 +124,7 @@ export const Feed = () => {
                         )}
                       </div>
 
-                      <div style={{ textAlign: "left", fontSize: "15px" }}>
+                      <div className="all-post-font-size">
                         {" "}
                         <span>{item?.content} </span>
                       </div>

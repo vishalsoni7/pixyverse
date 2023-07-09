@@ -25,6 +25,22 @@
     rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
 
+.edit-inner-div textarea {
+  color: whitesmoke;
+  background: #252525;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 5px;
+  resize: none;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+    rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+}
+
+.edit-inner-div textarea:focus,
+.edit-inner-div textarea:hover {
+  outline: none;
+}
+
 .edit-user-btn {
   font-size: medium;
   margin-top: 0.5rem;

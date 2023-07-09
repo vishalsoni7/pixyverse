@@ -71,7 +71,10 @@ export const Bookmark = () => {
                             {" "}
                             @{item.username}{" "}
                           </span>
-                          <span> {item.createdAt} </span>
+                          <span>
+                            {" "}
+                            {new Date(item?.createdAt).toDateString()}{" "}
+                          </span>
                         </div>
 
                         {handleEdit(item.username) && (
@@ -94,7 +97,7 @@ export const Bookmark = () => {
                         )}
                       </div>
 
-                      <div style={{ textAlign: "left" }}>
+                      <div className="all-post-font-size">
                         {" "}
                         <span>{item.content} </span>
                       </div>

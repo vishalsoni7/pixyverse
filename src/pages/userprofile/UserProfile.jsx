@@ -147,7 +147,7 @@ export const UserProfile = () => {
                         {" "}
                         @{item.username}{" "}
                       </span>
-                      <span> {item.createdAt} </span>
+                      <span> {new Date(item?.createdAt).toDateString()} </span>
                     </div>
 
                     {handleEdit(item.username) && (
@@ -170,7 +170,7 @@ export const UserProfile = () => {
                     )}
                   </div>
 
-                  <div style={{ textAlign: "left" }}>
+                  <div className="all-post-font-size">
                     {" "}
                     <span>{item.content} </span>
                   </div>

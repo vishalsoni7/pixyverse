@@ -84,5 +84,6 @@
 }
 
 .all-post-font-size {
-  font-size: 15px;
+  font-size: smaller;
+  text-align: left;
 }

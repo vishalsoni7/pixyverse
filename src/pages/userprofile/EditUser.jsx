@@ -63,14 +63,17 @@ export const EditUser = () => {
         </div>
         <div className="edit-inner-div">
           <h3> Bio </h3>
-          <input
+          <textarea
             placeholder="Bio"
             type="text"
             value={user?.bio}
             onChange={handleInput}
             name="bio"
             id="bio"
-          />
+            rows="5"
+          >
+            {" "}
+          </textarea>
         </div>
         <div className="edit-inner-div">
           <h3> Url </h3>

@@ -5,12 +5,14 @@
 
 .feed-inner-div {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: flex-start;
   flex-direction: column;
   position: sticky;
   height: fit-content;
   top: 0;
+  gap: 29rem;
+  flex-wrap: wrap;
 }
 
 .signout {
